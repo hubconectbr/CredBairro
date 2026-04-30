@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal do Líder: Consultoria de Crédito Integrada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Trust & Growth (Slate, Indigo, Emerald, Amber) -->
+    <!-- Application Structure Plan: A arquitetura unificada organiza a experiência em 4 pilares: 
+         1. Diagnóstico e Contexto (Gráfico de alocação e Simulador de Saúde Financeira); 
+         2. Exploração de Mercado (Linhas de crédito filtráveis e Comparativo de taxas); 
+         3. Preparação e Checklist (Requisitos documentais e Guia de Projeto); 
+         4. Governança e Suporte (Passo a passo, Glossário e Modelos Jurídicos). 
+         Essa estrutura permite que o líder navegue entre a teoria e a ferramenta prática sem perder o contexto do levantamento. -->
+    <!-- Visualization & Content Choices: 
+         - Gráfico de Alocação -> Doughnut -> Mostrar onde outras associações investem.
+         - Simulador de Saúde -> Gauge Chart -> Feedback visual imediato sobre risco.
+         - Explorador de Crédito -> Cards dinâmicos + Bar Chart -> Comparação objetiva de bancos.
+         - Checklist -> Interactive List -> Gestão de documentos em tempo real.
+         - Passo a Passo -> Vertical Timeline -> Visualização clara do processo burocrático.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #4f46e5; transition: width 0.3s; }
+        .nav-link:hover::after { width: 100%; }
+        .step-dot { width: 20px; height: 20px; border-radius: 50%; position: absolute; left: -10px; top: 0; background: #4f46e5; border: 4px solid #fff; box-shadow: 0 0 0 4px #e0e7ff; }
+    </style>
+</head>
+<body class="bg-stone-50 text-slate-800 font-sans antialiased">
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-3xl">&#127963;</span>
+                <span class="font-black text-xl text-slate-900 tracking-tighter uppercase">Associação<span class="text-indigo-600">Forte</span></span>
+            </div>
+            <div class="hidden lg:flex space-x-8">
+                <a href="#diagnostico" class="nav-link text-sm font-bold text-slate-600 hover:text-indigo-600">Diagnóstico</a>
+                <a href="#mercado" class="nav-link text-sm font-bold text-slate-600 hover:text-indigo-600">Linhas de Crédito</a>
+                <a href="#requisitos" class="nav-link text-sm font-bold text-slate-600 hover:text-indigo-600">Requisitos</a>
+                <a href="#processo" class="nav-link text-sm font-bold text-slate-600 hover:text-indigo-600">Passo a Passo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white py-16 px-4">
+        <div class="max-w-5xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">Levantamento Estratégico & <br><span class="text-indigo-400">Consultoria de Crédito</span></h1>
+            <p class="text-indigo-100 text-xl max-w-3xl mx-auto font-light leading-relaxed">
+                Um ecossistema completo para líderes de associações de bairro. Planeje, simule e conquiste o recurso necessário para transformar sua comunidade.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-16 space-y-32">
+
+        <!-- SECTION 1: DIAGNÓSTICO FINANCEIRO (PONTOS 1 E 6 UNIFICADOS) -->
+        <section id="diagnostico" class="scroll-mt-24">
+            <div class="mb-12 border-l-4 border-indigo-600 pl-6">
+                <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tighter">1. Diagnóstico e Viabilidade</h2>
+                <p class="text-slate-600 mt-2">Entenda o panorama do setor e teste a capacidade financeira da sua associação antes de procurar o banco.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Gráfico de Alocação (Versão 1) -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200">
+                    <h3 class="font-bold text-slate-800 mb-6 flex items-center">
+                        <span class="mr-2">&#128202;</span> Onde as Associações Investem
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="allocationChart"></canvas>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-6 italic">Baseado em dados médios de associações comunitárias que tomaram microcrédito nos últimos 24 meses.</p>
+                </div>
+
+                <!-- Simulador de Saúde Financeira (Versão 2) -->
+                <div class="bg-indigo-900 text-white p-8 rounded-3xl shadow-xl">
+                    <h3 class="font-bold mb-6 flex items-center">
+                        <span class="mr-2">&#128187;</span> Simulador de Capacidade
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-[10px] uppercase font-bold text-indigo-300 mb-1">Receita Mensal Média (R$)</label>
+                            <input type="number" id="revInput" placeholder="Ex: 5000" class="w-full bg-indigo-950/50 border border-indigo-700 p-3 rounded-lg text-white outline-none focus:border-emerald-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase font-bold text-indigo-300 mb-1">Custo Fixo Mensal (R$)</label>
+                            <input type="number" id="expInput" placeholder="Ex: 3500" class="w-full bg-indigo-950/50 border border-indigo-700 p-3 rounded-lg text-white outline-none focus:border-emerald-500 transition">
+                        </div>
+                        <button onclick="calculateHealth()" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-black uppercase tracking-widest rounded-lg transition-colors">Calcular Risco</button>
+                    </div>
+
+                    <div id="healthResult" class="hidden mt-6 pt-6 border-t border-indigo-800">
+                        <div class="flex justify-between items-center mb-4">
+                            <span id="healthLabel" class="text-sm font-bold uppercase">Análise:</span>
+                            <span id="healthValue" class="text-2xl font-black">0%</span>
+                        </div>
+                        <div class="chart-container h-32">
+                            <canvas id="healthGauge"></canvas>
+                        </div>
+                        <p id="healthAdvice" class="text-xs text-indigo-200 mt-4 text-center"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: EXPLORADOR DE LINHAS DE CRÉDITO (VERSÃO 1 EXPANDIDA) -->
+        <section id="mercado" class="scroll-mt-24">
+            <div class="mb-12 border-l-4 border-emerald-500 pl-6">
+                <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tighter">2. Levantamento de Linhas de Crédito</h2>
+                <p class="text-slate-600 mt-2">Compare taxas e condições das principais instituições financeiras para o terceiro setor.</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-stone-200 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center space-x-3">
+                    <span class="text-sm font-bold text-slate-500 uppercase">Filtrar por Perfil:</span>
+                    <select id="creditFilter" class="bg-stone-100 border-none p-2 rounded-lg text-sm font-bold focus:ring-2 focus:ring-emerald-500">
+                        <option value="all">Todas as Instituições</option>
+                        <option value="publico">Bancos Públicos</option>
+                        <option value="micro">Microcrédito / Cooperativas</option>
+                        <option value="fomento">Agências de Fomento</option>
+                    </select>
+                </div>
+                <div class="text-sm font-medium text-slate-400">Total de <span id="creditTotal" class="text-emerald-600 font-black">0</span> linhas mapeadas</div>
+            </div>
+
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                <!-- Cards Container -->
+                <div class="xl:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4" id="creditCardsContainer">
+                    <!-- Dinamicamente gerado -->
+                </div>
+                
+                <!-- Rates Chart -->
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm h-fit">
+                    <h4 class="text-center font-bold text-slate-500 uppercase text-[10px] tracking-widest mb-6">Comparativo de Taxas (% ao mês)</h4>
+                    <div class="chart-container">
+                        <canvas id="ratesChart"></canvas>
+                    </div>
+                    <div class="mt-6 p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                        <p class="text-xs text-emerald-800 leading-relaxed">
+                            <strong>Dica da Consultoria:</strong> Linhas de fomento estaduais costumam ter as menores taxas, mas exigem projetos sociais muito bem estruturados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PREPARAÇÃO, REQUISITOS E PROJETOS (PONTOS 1, 2, 4 E CHECKLIST) -->
+        <section id="requisitos" class="scroll-mt-24">
+            <div class="mb-12 border-l-4 border-amber-500 pl-6">
+                <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tighter">3. Centro de Preparação Institucional</h2>
+                <p class="text-slate-600 mt-2">Documentação, Governança e o Projeto: as chaves para a aprovação.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Checklist de Documentos (Versão 1) -->
+                <div class="lg:col-span-1 bg-white p-8 rounded-3xl border border-stone-200">
+                    <h3 class="font-bold text-slate-800 mb-6 flex items-center">
+                        <span class="mr-2">&#128193;</span> Checklist de Documentos
+                    </h3>
+                    <div id="checklistItems" class="space-y-3">
+                        <!-- JS controlará o progresso -->
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-stone-100">
+                        <div class="flex justify-between text-xs font-bold mb-2">
+                            <span class="text-slate-500">PRONTIDÃO DOCUMENTAL</span>
+                            <span id="checkPercent" class="text-amber-600">0%</span>
+                        </div>
+                        <div class="w-full bg-stone-100 h-2 rounded-full overflow-hidden">
+                            <div id="checkBar" class="bg-amber-500 h-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guia de Projeto e Garantias (Versão 2) -->
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Projeto -->
+                    <div class="bg-slate-900 text-white p-8 rounded-3xl">
+                        <h3 class="font-bold text-lg mb-4 flex items-center"><span class="mr-2">&#128221;</span> O Projeto Social</h3>
+                        <p class="text-sm text-slate-400 mb-6">O banco precisa enxergar o retorno social e a sustentabilidade.</p>
+                        <ul class="space-y-4">
+                            <li class="bg-slate-800 p-3 rounded-lg border-l-4 border-indigo-500">
+                                <span class="block text-xs font-bold text-indigo-300">OBJETIVO</span>
+                                <span class="text-sm">O que será feito com o recurso?</span>
+                            </li>
+                            <li class="bg-slate-800 p-3 rounded-lg border-l-4 border-indigo-500">
+                                <span class="block text-xs font-bold text-indigo-300">PÚBLICO</span>
+                                <span class="text-sm">Quantos moradores serão impactados?</span>
+                            </li>
+                            <li class="bg-slate-800 p-3 rounded-lg border-l-4 border-indigo-500">
+                                <span class="block text-xs font-bold text-indigo-300">PAGAMENTO</span>
+                                <span class="text-sm">Como as parcelas serão pagas? (ROI)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Garantias e Governança -->
+                    <div class="bg-white p-8 rounded-3xl border border-stone-200">
+                        <h3 class="font-bold text-lg mb-4 flex items-center text-slate-800"><span class="mr-2">&#128737;</span> Garantias e Ética</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-stone-50 rounded-xl">
+                                <h4 class="font-bold text-sm text-indigo-600">Tipos de Garantias</h4>
+                                <p class="text-xs text-slate-500 mt-1">Aval dos diretores, garantia de bens ou Fundos Garantidores (FAMPE).</p>
+                            </div>
+                            <div class="p-4 bg-stone-50 rounded-xl">
+                                <h4 class="font-bold text-sm text-emerald-600">Governança (Ata)</h4>
+                                <p class="text-xs text-slate-500 mt-1">Toda tomada de crédito deve ser aprovada em assembleia registrada.</p>
+                                <button onclick="toggleModal('modalAta')" class="mt-2 text-[10px] font-black text-indigo-600 uppercase hover:underline">Ver Modelo de Ata</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: PASSO A PASSO E ALTERNATIVAS (PONTOS 3 E TIMELINE) -->
+        <section id="processo" class="scroll-mt-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Timeline do Processo -->
+                <div>
+                    <div class="mb-8 border-l-4 border-slate-900 pl-6">
+                        <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tighter">4. Jornada da Aprovação</h2>
+                        <p class="text-slate-600 mt-2">O caminho crítico do pedido de crédito.</p>
+                    </div>
+                    <div class="relative ml-4 border-l-2 border-indigo-100 pl-8 space-y-12">
+                        <div class="relative">
+                            <div class="step-dot"></div>
+                            <h4 class="font-bold text-slate-900">1. Projeto e Diagnóstico</h4>
+                            <p class="text-sm text-slate-500">Defina o valor e use nosso simulador para checar se a parcela cabe no bolso.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="step-dot"></div>
+                            <h4 class="font-bold text-slate-900">2. Reunião de Documentos</h4>
+                            <p class="text-sm text-slate-500">Complete o checklist e certifique-se de que as CNDs estão em dia.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="step-dot"></div>
+                            <h4 class="font-bold text-slate-900">3. Apresentação ao Banco</h4>
+                            <p class="text-sm text-slate-500">Negocie taxas. Use o glossário para não se perder nos termos técnicos.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="step-dot" style="background: #10b981; box-shadow: 0 0 0 4px #ecfdf5;"></div>
+                            <h4 class="font-bold text-slate-900">4. Liberação do Recurso</h4>
+                            <p class="text-sm text-slate-500">Recurso em conta para execução das obras ou projetos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fontes de Fomento (Alternativas) -->
+                <div class="bg-indigo-600 p-10 rounded-3xl text-white">
+                    <h3 class="text-2xl font-black mb-6 uppercase tracking-tight">5. Alternativas de Fomento</h3>
+                    <p class="text-indigo-100 mb-8 leading-relaxed">Associações fortes combinam crédito com recursos não-reembolsáveis.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-indigo-500 p-3 rounded-xl text-2xl">&#127903;</div>
+                            <div>
+                                <h4 class="font-bold">Emendas Parlamentares</h4>
+                                <p class="text-xs text-indigo-200">Articulação política para infraestrutura pesada (obras na sede).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-indigo-500 p-3 rounded-xl text-2xl">&#127891;</div>
+                            <div>
+                                <h4 class="font-bold">Editais de Fundações</h4>
+                                <p class="text-xs text-indigo-200">Fundações privadas que doam recursos para causas sociais específicas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 p-4 bg-indigo-700 rounded-2xl">
+                        <h4 class="text-center font-bold text-xs mb-2">DICIONÁRIO RÁPIDO DO LÍDER</h4>
+                        <div id="glossarySummary" class="grid grid-cols-2 gap-2">
+                            <!-- Injetado via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Modelo de Ata -->
+    <div id="modalAta" class="fixed inset-0 bg-slate-900/90 hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 relative overflow-y-auto max-h-[85vh]">
+            <button onclick="toggleModal('modalAta')" class="absolute top-4 right-4 text-4xl text-slate-300 hover:text-slate-900 transition">&times;</button>
+            <h3 class="text-2xl font-black text-slate-900 mb-6 border-b pb-4 uppercase tracking-tighter">Modelo de Ata de Autorização</h3>
+            <div class="bg-stone-50 p-6 rounded-2xl border font-mono text-[11px] text-slate-600 leading-relaxed overflow-x-auto">
+[MODELO SIMPLIFICADO]
+ATA DA ASSEMBLEIA GERAL DA ASSOCIAÇÃO [NOME]
+DATA: __/__/____  HORÁRIO: __:__
+ORDEM DO DIA: 1. Contratação de crédito junto à [BANCO]; 2. Garantias.
+... Após debate, os associados decidiram por UNANIMIDADE autorizar o Presidente a 
+contratar o valor de R$ [VALOR], com juros de [TAXA]% e prazo de [MESES].
+O recurso será aplicado exclusivamente na [OBJETIVO].
+Como garantia, autoriza-se a [TIPO DE GARANTIA]...
+Assinam: Presidente e Secretário.
+            </div>
+            <p class="mt-6 text-xs text-slate-500 italic">Dica: A ata deve ser registrada em cartório e levada ao banco no dia da assinatura do contrato.</p>
+        </div>
+    </div>
+
+    <footer class="bg-slate-950 text-slate-500 py-16 px-4">
+        <div class="max-w-7xl mx-auto text-center space-y-4">
+            <p class="text-xs font-bold uppercase tracking-widest">Consultoria Técnica para Associações de Bairro</p>
+            <p class="text-sm">Desenvolvido como ferramenta de suporte à liderança comunitária.</p>
+        </div>
+    </footer>
+
+    <script>
+        // DATA
+        const creditData = [
+            { id: 1, name: "Pronampe Social", bank: "Bancos Públicos", type: "publico", rate: 1.1, limit: "Até R$ 150 mil", icon: "&#127974;" },
+            { id: 2, name: "Microcrédito OSC", bank: "Cooperativas", type: "micro", rate: 2.1, limit: "Até R$ 20 mil", icon: "&#128181;" },
+            { id: 3, name: "Fomento Regional", bank: "Agências Estaduais", type: "fomento", rate: 0.85, limit: "Sob Projeto", icon: "&#127793;" },
+            { id: 4, name: "Crédito Sustentável", bank: "Bancos de Fomento", type: "fomento", rate: 0.95, limit: "Até R$ 100 mil", icon: "&#127757;" },
+            { id: 5, name: "Aporte Cooperativo", bank: "Sicoob/Sicredi", type: "micro", rate: 1.75, limit: "R$ 50 mil", icon: "&#129309;" }
+        ];
+
+        const checklistItems = [
+            "CNPJ Regular e Ativo",
+            "Estatuto Registrado",
+            "Ata de Eleição Vigente",
+            "Certidão Negativa (CND)",
+            "Plano de Projeto Pronto",
+            "Ata de Autorização (Crédito)"
+        ];
+
+        const glossaryTerms = [
+            { term: "CET", def: "Custo Total" },
+            { term: "Carência", def: "Espera Inicial" },
+            { term: "Amortização", def: "Pagamento" },
+            { term: "Garantia", def: "Segurança" }
+        ];
+
+        let healthChart = null;
+        let ratesChart = null;
+
+        // INITIALIZATION
+        window.onload = () => {
+            renderAllocationChart();
+            renderCreditCards(creditData);
+            renderRatesChart(creditData);
+            renderChecklist();
+            renderGlossary();
+            updateStats();
+        };
+
+        // CHARTS
+        function renderAllocationChart() {
+            const ctx = document.getElementById('allocationChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Obras/Sede', 'Projetos Sociais', 'Equipamentos', 'Capital de Giro'],
+                    datasets: [{
+                        data: [45, 25, 20, 10],
+                        backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#94a3b8'],
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, font: { size: 10 } } } }
+                }
+            });
+        }
+
+        function renderRatesChart(data) {
+            const ctx = document.getElementById('ratesChart').getContext('2d');
+            const sortedData = [...data].sort((a,b) => a.rate - b.rate);
+            
+            if (ratesChart) ratesChart.destroy();
+            
+            ratesChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sortedData.map(d => d.name),
+                    datasets: [{
+                        label: 'Taxa (% a.m.)',
+                        data: sortedData.map(d => d.rate),
+                        backgroundColor: sortedData.map(d => d.type === 'fomento' ? '#10b981' : d.type === 'publico' ? '#6366f1' : '#f59e0b'),
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { beginAtZero: true, grid: { display: false } }, y: { grid: { display: false }, ticks: { font: { size: 9 } } } }
+                }
+            });
+        }
+
+        // SIMULATOR LOGIC
+        function calculateHealth() {
+            const rev = parseFloat(document.getElementById('revInput').value) || 0;
+            const exp = parseFloat(document.getElementById('expInput').value) || 0;
+            const resArea = document.getElementById('healthResult');
+            const label = document.getElementById('healthLabel');
+            const valSpan = document.getElementById('healthValue');
+            const advice = document.getElementById('healthAdvice');
+
+            if (rev <= 0) return;
+
+            const margin = rev - exp;
+            const percentage = (margin / rev) * 100;
+            const safeParcel = margin * 0.3;
+
+            resArea.classList.remove('hidden');
+            valSpan.textContent = Math.max(0, percentage).toFixed(0) + "%";
+
+            let color = '#ef4444';
+            if (percentage > 30) {
+                color = '#10b981';
+                label.textContent = "Excelente Saúde";
+                advice.innerHTML = `Sinal Verde. Capacidade estimada de parcela mensal: <br><strong class="text-white text-lg">R$ ${safeParcel.toFixed(2)}</strong>`;
+            } else if (percentage > 10) {
+                color = '#f59e0b';
+                label.textContent = "Saúde Regular";
+                advice.innerHTML = `Sinal Amarelo. Recomendamos cautela. Parcela máxima sugerida: <br><strong class="text-white text-lg">R$ ${safeParcel.toFixed(2)}</strong>`;
+            } else {
+                label.textContent = "Risco Elevado";
+                advice.innerHTML = `Sinal Vermelho. A margem líquida é muito baixa para novos empréstimos.`;
+            }
+
+            updateGauge(Math.max(0, percentage), color);
+        }
+
+        function updateGauge(val, color) {
+            const ctx = document.getElementById('healthGauge').getContext('2d');
+            if (healthChart) healthChart.destroy();
+            healthChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [val, 100 - val],
+                        backgroundColor: [color, '#1e1b4b'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    circumference: 180,
+                    rotation: 270,
+                    cutout: '85%',
+                    plugins: { tooltip: { enabled: false } }
+                }
+            });
+        }
+
+        // UI RENDERING
+        function renderCreditCards(data) {
+            const container = document.getElementById('creditCardsContainer');
+            container.innerHTML = '';
+            data.forEach(item => {
+                const colorClass = item.type === 'fomento' ? 'text-emerald-600 bg-emerald-50' : item.type === 'publico' ? 'text-indigo-600 bg-indigo-50' : 'text-amber-600 bg-amber-50';
+                container.innerHTML += `
+                    <div class="bg-white border border-stone-200 p-5 rounded-2xl hover:shadow-lg transition-all group">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-3xl">${item.icon}</span>
+                            <span class="text-[10px] font-black uppercase px-2 py-1 rounded-md ${colorClass}">${item.bank}</span>
+                        </div>
+                        <h4 class="font-black text-slate-900 group-hover:text-indigo-600 transition-colors">${item.name}</h4>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <div class="bg-stone-50 p-2 rounded-lg">
+                                <span class="block text-[8px] font-bold text-slate-400 uppercase">Juros</span>
+                                <span class="text-sm font-bold text-slate-700">${item.rate}% a.m.</span>
+                            </div>
+                            <div class="bg-stone-50 p-2 rounded-lg">
+                                <span class="block text-[8px] font-bold text-slate-400 uppercase">Limite</span>
+                                <span class="text-sm font-bold text-slate-700">${item.limit}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderChecklist() {
+            const container = document.getElementById('checklistItems');
+            checklistItems.forEach((item, idx) => {
+                container.innerHTML += `
+                    <label class="flex items-center space-x-3 p-3 bg-stone-50 rounded-xl border border-stone-200 cursor-pointer hover:bg-stone-100 transition">
+                        <input type="checkbox" class="check-input w-5 h-5 rounded text-indigo-600 border-stone-300 focus:ring-indigo-500" onchange="updateCheckProgress()">
+                        <span class="text-sm font-medium text-slate-700">${item}</span>
+                    </label>
+                `;
+            });
+        }
+
+        function updateCheckProgress() {
+            const checks = document.querySelectorAll('.check-input');
+            const checked = Array.from(checks).filter(c => c.checked).length;
+            const percent = Math.round((checked / checks.length) * 100);
+            
+            document.getElementById('checkPercent').textContent = percent + "%";
+            document.getElementById('checkBar').style.width = percent + "%";
+            
+            if (percent < 50) document.getElementById('checkBar').className = "bg-amber-500 h-full transition-all duration-500";
+            else if (percent < 100) document.getElementById('checkBar').className = "bg-indigo-500 h-full transition-all duration-500";
+            else document.getElementById('checkBar').className = "bg-emerald-500 h-full transition-all duration-500";
+        }
+
+        function renderGlossary() {
+            const container = document.getElementById('glossarySummary');
+            glossaryTerms.forEach(t => {
+                container.innerHTML += `
+                    <div class="bg-indigo-500/30 p-2 rounded-lg border border-indigo-400/20">
+                        <span class="block text-[10px] font-black uppercase text-indigo-100">${t.term}</span>
+                        <span class="text-[9px] text-white/70">${t.def}</span>
+                    </div>
+                `;
+            });
+        }
+
+        // UTILS
+        function toggleModal(id) {
+            document.getElementById(id).classList.toggle('hidden');
+        }
+
+        function updateStats() {
+            document.getElementById('creditTotal').textContent = creditData.length;
+        }
+
+        // Filter Logic
+        document.getElementById('creditFilter').addEventListener('change', (e) => {
+            const val = e.target.value;
+            const filtered = val === 'all' ? creditData : creditData.filter(d => d.type === val);
+            renderCreditCards(filtered);
+            renderRatesChart(filtered);
+            document.getElementById('creditTotal').textContent = filtered.length;
+        });
+
+    </script>
+</body>
+</html>
