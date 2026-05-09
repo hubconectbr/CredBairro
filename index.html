@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal do Líder: Consultoria de Crédito Integrada</title>
+    <title>CredBairro: Consultoria de Crédito Integrada</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
@@ -13,7 +13,7 @@
          2. Exploração de Mercado (Linhas de crédito filtráveis e Comparativo de taxas); 
          3. Preparação e Checklist (Requisitos documentais e Guia de Projeto); 
          4. Governança e Suporte (Passo a passo, Glossário e Modelos Jurídicos). 
-         Essa estrutura permite que o líder navegue entre a teoria e a ferramenta prática sem perder o contexto do levantamento. -->
+         O menu agora inclui o link externo para o Hub CredBairro. -->
     <!-- Visualization & Content Choices: 
          - Gráfico de Alocação -> Doughnut -> Mostrar onde outras associações investem.
          - Simulador de Saúde -> Gauge Chart -> Feedback visual imediato sobre risco.
@@ -46,13 +46,14 @@
         <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <span class="text-3xl">&#127963;</span>
-                <span class="font-black text-xl text-slate-900 tracking-tighter uppercase">Cred<span class="text-indigo-600">Associação</span></span>
+                <span class="font-black text-xl text-slate-900 tracking-tighter uppercase">CRED<span class="text-indigo-600">BAIRRO</span></span>
             </div>
             <div class="hidden lg:flex space-x-8">
                 <a href="#diagnostico" class="nav-link text-sm font-bold text-slate-600 hover:text-indigo-600">Diagnóstico</a>
                 <a href="#mercado" class="nav-link text-sm font-bold text-slate-600 hover:text-indigo-600">Linhas de Crédito</a>
                 <a href="#requisitos" class="nav-link text-sm font-bold text-slate-600 hover:text-indigo-600">Requisitos</a>
                 <a href="#processo" class="nav-link text-sm font-bold text-slate-600 hover:text-indigo-600">Passo a Passo</a>
+                <a href="https://hubconectbr.github.io/CredBairro/index2.html" target="_blank" class="nav-link text-sm font-bold text-indigo-600 hover:text-indigo-800">CREDBAIRRO &#10140;</a>
             </div>
         </div>
     </nav>
@@ -69,7 +70,7 @@
 
     <main class="max-w-7xl mx-auto px-4 py-16 space-y-32">
 
-        <!-- SECTION 1: DIAGNÓSTICO FINANCEIRO (PONTOS 1 E 6 UNIFICADOS) -->
+        <!-- SECTION 1: DIAGNÓSTICO FINANCEIRO -->
         <section id="diagnostico" class="scroll-mt-24">
             <div class="mb-12 border-l-4 border-indigo-600 pl-6">
                 <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tighter">1. Diagnóstico e Viabilidade</h2>
@@ -77,7 +78,7 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Gráfico de Alocação (Versão 1) -->
+                <!-- Gráfico de Alocação -->
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200">
                     <h3 class="font-bold text-slate-800 mb-6 flex items-center">
                         <span class="mr-2">&#128202;</span> Onde as Associações Investem
@@ -88,7 +89,7 @@
                     <p class="text-xs text-slate-500 mt-6 italic">Baseado em dados médios de associações comunitárias que tomaram microcrédito nos últimos 24 meses.</p>
                 </div>
 
-                <!-- Simulador de Saúde Financeira (Versão 2) -->
+                <!-- Simulador de Saúde Financeira -->
                 <div class="bg-indigo-900 text-white p-8 rounded-3xl shadow-xl">
                     <h3 class="font-bold mb-6 flex items-center">
                         <span class="mr-2">&#128187;</span> Simulador de Capacidade
@@ -119,7 +120,7 @@
             </div>
         </section>
 
-        <!-- SECTION 2: EXPLORADOR DE LINHAS DE CRÉDITO (VERSÃO 1 EXPANDIDA) -->
+        <!-- SECTION 2: EXPLORADOR DE LINHAS DE CRÉDITO -->
         <section id="mercado" class="scroll-mt-24">
             <div class="mb-12 border-l-4 border-emerald-500 pl-6">
                 <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tighter">2. Levantamento de Linhas de Crédito</h2>
@@ -142,7 +143,7 @@
             <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
                 <!-- Cards Container -->
                 <div class="xl:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4" id="creditCardsContainer">
-                    <!-- Dinamicamente gerado -->
+                    <!-- Dinamicamente gerado via JS -->
                 </div>
                 
                 <!-- Rates Chart -->
@@ -153,14 +154,14 @@
                     </div>
                     <div class="mt-6 p-4 bg-emerald-50 rounded-xl border border-emerald-100">
                         <p class="text-xs text-emerald-800 leading-relaxed">
-                            <strong>Dica da Consultoria:</strong> Linhas de fomento estaduais costumam ter as menores taxas, mas exigem projetos sociais muito bem estruturados.
+                            <strong>Dica CredBairro:</strong> Linhas de fomento estaduais costumam ter as menores taxas, mas exigem projetos sociais muito bem estruturados.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 3: PREPARAÇÃO, REQUISITOS E PROJETOS (PONTOS 1, 2, 4 E CHECKLIST) -->
+        <!-- SECTION 3: PREPARAÇÃO E REQUISITOS -->
         <section id="requisitos" class="scroll-mt-24">
             <div class="mb-12 border-l-4 border-amber-500 pl-6">
                 <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tighter">3. Centro de Preparação Institucional</h2>
@@ -169,13 +170,13 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 
-                <!-- Checklist de Documentos (Versão 1) -->
+                <!-- Checklist de Documentos -->
                 <div class="lg:col-span-1 bg-white p-8 rounded-3xl border border-stone-200">
                     <h3 class="font-bold text-slate-800 mb-6 flex items-center">
                         <span class="mr-2">&#128193;</span> Checklist de Documentos
                     </h3>
                     <div id="checklistItems" class="space-y-3">
-                        <!-- JS controlará o progresso -->
+                        <!-- Injetado via JS -->
                     </div>
                     <div class="mt-8 pt-6 border-t border-stone-100">
                         <div class="flex justify-between text-xs font-bold mb-2">
@@ -188,7 +189,7 @@
                     </div>
                 </div>
 
-                <!-- Guia de Projeto e Garantias (Versão 2) -->
+                <!-- Guia de Projeto e Garantias -->
                 <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Projeto -->
                     <div class="bg-slate-900 text-white p-8 rounded-3xl">
@@ -228,10 +229,10 @@
             </div>
         </section>
 
-        <!-- SECTION 4: PASSO A PASSO E ALTERNATIVAS (PONTOS 3 E TIMELINE) -->
+        <!-- SECTION 4: PASSO A PASSO -->
         <section id="processo" class="scroll-mt-24">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                <!-- Timeline do Processo -->
+                <!-- Timeline -->
                 <div>
                     <div class="mb-8 border-l-4 border-slate-900 pl-6">
                         <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tighter">4. Jornada da Aprovação</h2>
@@ -261,28 +262,28 @@
                     </div>
                 </div>
 
-                <!-- Fontes de Fomento (Alternativas) -->
+                <!-- Fontes Alternativas -->
                 <div class="bg-indigo-600 p-10 rounded-3xl text-white">
-                    <h3 class="text-2xl font-black mb-6 uppercase tracking-tight">5. Alternativas de Fomento</h3>
+                    <h3 class="text-2xl font-black mb-6 uppercase tracking-tight">5. Além do Empréstimo</h3>
                     <p class="text-indigo-100 mb-8 leading-relaxed">Associações fortes combinam crédito com recursos não-reembolsáveis.</p>
                     <div class="space-y-6">
                         <div class="flex items-start space-x-4">
                             <div class="bg-indigo-500 p-3 rounded-xl text-2xl">&#127903;</div>
                             <div>
                                 <h4 class="font-bold">Emendas Parlamentares</h4>
-                                <p class="text-xs text-indigo-200">Articulação política para infraestrutura pesada (obras na sede).</p>
+                                <p class="text-xs text-indigo-200">Articulação política para infraestrutura pesada.</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-4">
                             <div class="bg-indigo-500 p-3 rounded-xl text-2xl">&#127891;</div>
                             <div>
                                 <h4 class="font-bold">Editais de Fundações</h4>
-                                <p class="text-xs text-indigo-200">Fundações privadas que doam recursos para causas sociais específicas.</p>
+                                <p class="text-xs text-indigo-200">Doações para causas sociais específicas.</p>
                             </div>
                         </div>
                     </div>
                     <div class="mt-8 p-4 bg-indigo-700 rounded-2xl">
-                        <h4 class="text-center font-bold text-xs mb-2">DICIONÁRIO RÁPIDO DO LÍDER</h4>
+                        <h4 class="text-center font-bold text-xs mb-2 uppercase">Dicionário do Líder</h4>
                         <div id="glossarySummary" class="grid grid-cols-2 gap-2">
                             <!-- Injetado via JS -->
                         </div>
@@ -309,14 +310,14 @@ O recurso será aplicado exclusivamente na [OBJETIVO].
 Como garantia, autoriza-se a [TIPO DE GARANTIA]...
 Assinam: Presidente e Secretário.
             </div>
-            <p class="mt-6 text-xs text-slate-500 italic">Dica: A ata deve ser registrada em cartório e levada ao banco no dia da assinatura do contrato.</p>
+            <p class="mt-6 text-xs text-slate-500 italic">Nota: A ata deve ser registrada em cartório para validade bancária.</p>
         </div>
     </div>
 
     <footer class="bg-slate-950 text-slate-500 py-16 px-4">
         <div class="max-w-7xl mx-auto text-center space-y-4">
-            <p class="text-xs font-bold uppercase tracking-widest">Consultoria Técnica para Associações de Bairro</p>
-            <p class="text-sm">Desenvolvido como ferramenta de suporte à liderança comunitária.</p>
+            <p class="text-xs font-bold uppercase tracking-widest text-indigo-400">CredBairro - Consultoria de Liderança Comunitária</p>
+            <p class="text-sm">Desenvolvido como ferramenta de suporte técnico e financeiro.</p>
         </div>
     </footer>
 
@@ -340,10 +341,10 @@ Assinam: Presidente e Secretário.
         ];
 
         const glossaryTerms = [
-            { term: "CET", def: "Custo Total" },
-            { term: "Carência", def: "Espera Inicial" },
-            { term: "Amortização", def: "Pagamento" },
-            { term: "Garantia", def: "Segurança" }
+            { term: "CET", def: "Custo Total Real" },
+            { term: "Carência", def: "Espera p/ Pagar" },
+            { term: "Amortização", def: "Abate da Dívida" },
+            { term: "Garantia", def: "Segurança Banco" }
         ];
 
         let healthChart = null;
@@ -408,7 +409,7 @@ Assinam: Presidente e Secretário.
             });
         }
 
-        // SIMULATOR LOGIC
+        // SIMULATOR
         function calculateHealth() {
             const rev = parseFloat(document.getElementById('revInput').value) || 0;
             const exp = parseFloat(document.getElementById('expInput').value) || 0;
@@ -437,7 +438,7 @@ Assinam: Presidente e Secretário.
                 advice.innerHTML = `Sinal Amarelo. Recomendamos cautela. Parcela máxima sugerida: <br><strong class="text-white text-lg">R$ ${safeParcel.toFixed(2)}</strong>`;
             } else {
                 label.textContent = "Risco Elevado";
-                advice.innerHTML = `Sinal Vermelho. A margem líquida é muito baixa para novos empréstimos.`;
+                advice.innerHTML = `Sinal Vermelho. A margem líquida é baixa para novos empréstimos.`;
             }
 
             updateGauge(Math.max(0, percentage), color);
@@ -464,7 +465,7 @@ Assinam: Presidente e Secretário.
             });
         }
 
-        // UI RENDERING
+        // RENDERING
         function renderCreditCards(data) {
             const container = document.getElementById('creditCardsContainer');
             container.innerHTML = '';
@@ -494,7 +495,7 @@ Assinam: Presidente e Secretário.
 
         function renderChecklist() {
             const container = document.getElementById('checklistItems');
-            checklistItems.forEach((item, idx) => {
+            checklistItems.forEach((item) => {
                 container.innerHTML += `
                     <label class="flex items-center space-x-3 p-3 bg-stone-50 rounded-xl border border-stone-200 cursor-pointer hover:bg-stone-100 transition">
                         <input type="checkbox" class="check-input w-5 h-5 rounded text-indigo-600 border-stone-300 focus:ring-indigo-500" onchange="updateCheckProgress()">
@@ -529,7 +530,6 @@ Assinam: Presidente e Secretário.
             });
         }
 
-        // UTILS
         function toggleModal(id) {
             document.getElementById(id).classList.toggle('hidden');
         }
