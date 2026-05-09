@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Araras 1 & 2 - Governança e Consultoria FASEC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        .bg-gradient-blue { background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 64, 175, 0.9) 100%); }
+        .hero-banner { 
+            background-image: url('https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); 
+            background-size: cover; 
+            background-position: center;
+        }
+        .card-impact { transition: all 0.3s ease; border: 1px solid rgba(226, 232, 240, 0.5); }
+        .card-impact:hover { transform: translateY(-5px); border-color: #3b82f6; box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1); }
+        .timeline-step { position: relative; padding-left: 2rem; border-left: 2px solid #e2e8f0; }
+        .timeline-step::before { content: ''; position: absolute; left: -9px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: #3b82f6; border: 3px solid #fff; }
+        .active-modal { display: flex !important; animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .whatsapp-float { position: fixed; bottom: 24px; right: 24px; z-index: 100; transition: transform 0.3s; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        .glass-dark { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 1.5rem; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+    <!-- Botão WhatsApp Flutuante -->
+    <a href="https://wa.me/#" target="_blank" class="whatsapp-float bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Navegação -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 p-2 rounded-lg text-white shadow-lg shadow-blue-200"><i class="fas fa-university"></i></div>
+                <span class="font-extrabold text-xl tracking-tighter text-slate-900 uppercase">ARARAS<span class="text-blue-600">PRO</span></span>
+            </div>
+            <!-- Menu Desktop -->
+            <div class="hidden lg:flex space-x-6 text-[10px] font-bold uppercase text-slate-600 tracking-widest items-center">
+                <a href="#home" class="hover:text-blue-600 transition">Home</a>
+                <a href="#radiografia" class="hover:text-blue-600 transition">Impacto Social</a>
+                <a href="#quem-somos" class="hover:text-blue-600 transition">Quem Somos</a>
+                <a href="https://hubconectbr.github.io/CredBairro/" target="_blank" class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-100 hover:bg-blue-600 hover:text-white transition">Plano de Ação</a>
+                <a href="#consultoria" class="hover:text-blue-600 transition">Consultoria</a>
+                <a href="#araraplay" class="hover:text-blue-600 transition">ARARAPLAY</a>
+                <a href="#transparencia" class="hover:text-blue-600 transition">Transparência</a>
+                <a href="#evidencias" class="hover:text-blue-600 transition">Evidências</a>
+                <a href="#contato" class="hover:text-blue-600 transition text-blue-600">Fale Conosco</a>
+            </div>
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-slate-600 text-xl"><i class="fas fa-bars"></i></button>
+        </div>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 p-6 flex flex-col space-y-4 text-xs font-bold uppercase shadow-xl">
+            <a href="#home" onclick="toggleMobileMenu()">Home</a>
+            <a href="#radiografia" onclick="toggleMobileMenu()">Impacto Social</a>
+            <a href="#quem-somos" onclick="toggleMobileMenu()">Quem Somos</a>
+            <a href="https://hubconectbr.github.io/CredBairro/" target="_blank">Plano de Ação</a>
+            <a href="#consultoria" onclick="toggleMobileMenu()">Consultoria</a>
+            <a href="#araraplay" onclick="toggleMobileMenu()">ARARAPLAY</a>
+            <a href="#transparencia" onclick="toggleMobileMenu()">Transparência</a>
+            <a href="#evidencias" onclick="toggleMobileMenu()">Evidências</a>
+            <a href="#contato" onclick="toggleMobileMenu()">Fale Conosco</a>
+        </div>
+    </nav>
+
+    <!-- Banner Principal -->
+    <header id="home" class="hero-banner relative h-[650px] flex items-center justify-center text-white">
+        <div class="absolute inset-0 bg-gradient-blue"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="inline-block bg-blue-500/30 px-4 py-1 rounded-full text-blue-200 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
+                Projeto Extensionista IV - FASEC
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight uppercase tracking-tighter">Comunidade em <span class="text-blue-400 italic">Harmonia.</span></h1>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Nossa consultoria jurídica integra o conhecimento acadêmico à realidade social para transformar as Associações Araras 1 e 2 em modelos de governança.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#consultoria" class="bg-blue-600 hover:bg-blue-500 px-8 py-4 rounded-xl font-bold transition shadow-xl shadow-blue-900/40 flex items-center gap-2 uppercase text-xs">
+                    Plano Estratégico
+                </a>
+                <a href="#araraplay" class="bg-white/10 hover:bg-white/20 border border-white/30 px-8 py-4 rounded-xl font-bold backdrop-blur-md transition uppercase text-xs">
+                    Acessar ARARAPLAY <i class="fas fa-play-circle ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção: Radiografia Social -->
+    <section id="radiografia" class="py-24 bg-white px-6 border-b border-slate-100">
+        <div class="container mx-auto text-center mb-16">
+            <span class="text-blue-600 font-bold uppercase tracking-widest text-[10px]">Identificação da Associação</span>
+            <h2 class="text-4xl font-black text-slate-900 mt-2 tracking-tighter uppercase italic">Radiografia do Impacto</h2>
+            <p class="text-slate-500 mt-4 max-w-2xl mx-auto">Mapeamento populacional e densidade da área atendida pela consultoria FASEC.</p>
+        </div>
+        <div class="container mx-auto grid md:grid-cols-4 gap-8">
+            <div class="bg-slate-50 p-10 rounded-[3rem] shadow-sm card-impact text-center border-b-4 border-blue-500">
+                <i class="fas fa-users text-blue-600 text-4xl mb-4"></i>
+                <h4 class="text-5xl font-black tracking-tighter">120</h4>
+                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Famílias</p>
+            </div>
+            <div class="bg-slate-50 p-10 rounded-[3rem] shadow-sm card-impact text-center border-b-4 border-green-500">
+                <i class="fas fa-id-card text-green-600 text-4xl mb-4"></i>
+                <h4 class="text-5xl font-black tracking-tighter">480</h4>
+                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Pessoas</p>
+            </div>
+            <div class="bg-slate-50 p-10 rounded-[3rem] shadow-sm card-impact text-center border-b-4 border-purple-500">
+                <i class="fas fa-map-marked-alt text-purple-600 text-4xl mb-4"></i>
+                <h4 class="text-5xl font-black tracking-tighter">2.5km²</h4>
+                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Área Abrangida</p>
+            </div>
+            <div class="bg-slate-50 p-10 rounded-[3rem] shadow-sm card-impact text-center border-b-4 border-amber-500">
+                <i class="fas fa-handshake text-amber-600 text-4xl mb-4"></i>
+                <h4 class="text-5xl font-black tracking-tighter">04</h4>
+                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Parcerias Ativas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quem Somos -->
+    <section id="quem-somos" class="py-24 bg-slate-50 px-6">
+        <div class="container mx-auto max-w-5xl">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl font-black text-blue-900 mb-6">Quem Somos</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        Acadêmicos do 4º período de Direito da <strong>Faculdade Serra do Carmo (FASEC)</strong>. Sob coordenação da <strong>Prof.ª Karine Mota</strong>, integramos teoria e prática para empoderar o Terceiro Setor em Palmas.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="p-6 bg-blue-50 rounded-3xl border border-blue-100">
+                            <h4 class="font-bold text-blue-700 text-sm italic">Missão</h4>
+                            <p class="text-[9px] text-slate-500 mt-2 uppercase font-black tracking-tighter">Assessoria Jurídica Social</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm">
+                            <h4 class="font-bold text-slate-800 text-sm italic">Visão</h4>
+                            <p class="text-[9px] text-slate-500 mt-2 uppercase font-black tracking-tighter">Gestão Sustentável</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" class="rounded-[3rem] shadow-2xl" alt="Equipe FASEC">
+                    <div class="absolute -bottom-6 -right-6 bg-blue-700 p-8 rounded-3xl text-white shadow-2xl text-center">
+                        <span class="text-4xl font-black italic">11+</span>
+                        <p class="text-[10px] uppercase font-bold mt-2 tracking-widest">Consultores</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARARAPLAY -->
+    <section id="araraplay" class="py-24 bg-slate-900 text-white px-6">
+        <div class="container mx-auto text-center mb-16">
+            <span class="text-blue-400 font-bold uppercase tracking-[0.3em] text-[10px]">Learning Hub</span>
+            <h2 class="text-6xl font-black mt-2 tracking-tighter uppercase italic">ARARA<span class="text-blue-500">PLAY</span></h2>
+            <p class="text-slate-400 mt-4 max-w-xl mx-auto">Explore as reuniões e discussões técnicas que fundamentam nossa consultoria.</p>
+        </div>
+        
+        <div class="container mx-auto grid lg:grid-cols-2 gap-12 mb-20">
+            <div class="bg-slate-800 p-8 rounded-[3rem] border border-white/5 group">
+                <div class="video-container mb-6 shadow-2xl group-hover:scale-[1.02] transition duration-500">
+                    <iframe src="https://www.youtube.com/watch?v=HXEC9D8n_LI" allowfullscreen></iframe>
+                </div>
+                <h4 class="text-xl font-bold mb-2 tracking-tight">Reunião de Alinhamento e Planejamento</h4>
+                <p class="text-[10px] text-blue-500 uppercase font-black tracking-widest">Episódio 01 - Governança</p>
+            </div>
+            <div class="bg-slate-800 p-8 rounded-[3rem] border border-white/5 group">
+                <div class="video-container mb-6 shadow-2xl group-hover:scale-[1.02] transition duration-500">
+                    <iframe src="https://www.youtube.com/watch?v=mvExLCo4tYw" allowfullscreen></iframe>
+                </div>
+                <h4 class="text-xl font-bold mb-2 tracking-tight">Análise de Linhas de Crédito e Fomento</h4>
+                <p class="text-[10px] text-blue-500 uppercase font-black tracking-widest">Episódio 02 - Estratégia Financeira</p>
+            </div>
+        </div>
+
+        <div class="container mx-auto grid lg:grid-cols-3 gap-8">
+            <div class="glass-dark p-10 rounded-[3rem] card-hover group border border-white/5">
+                <i class="fab fa-youtube text-4xl text-red-500 mb-8"></i>
+                <h4 class="text-2xl font-bold mb-4 tracking-tighter">YouTube</h4>
+                <a href="https://www.youtube.com/playlist?list=PLUXCliw5-Qw-CPxYYcVkREFkBINQrBSSu" target="_blank" class="text-blue-400 font-bold text-[10px] uppercase tracking-widest flex items-center hover:gap-4 transition-all">Playlist <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+            <div class="glass-dark p-10 rounded-[3rem] card-hover group border border-white/5">
+                <i class="fas fa-microphone-alt text-4xl text-green-500 mb-8"></i>
+                <h4 class="text-2xl font-bold mb-4 tracking-tighter">PodCast</h4>
+                <a href="https://open.spotify.com/show/6i7Oek5gqLeW1jPikYccLj?si=Wl6qXAzbS7efFQOJ3xcePA" target="_blank" class="text-green-400 font-bold text-[10px] uppercase tracking-widest flex items-center hover:gap-4 transition-all">Ouvir Agora <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+            <div class="glass-dark p-10 rounded-[3rem] card-hover group border border-white/5">
+                <i class="fas fa-desktop text-4xl text-blue-400 mb-8"></i>
+                <h4 class="text-2xl font-bold mb-4 tracking-tighter">Apresentação</h4>
+                <a href="https://docs.google.com/presentation/d/1s1LN59IfGKKVY2z_xCKHp60YXTnsK1EP/edit?usp=sharing" target="_blank" class="text-blue-300 font-bold text-[10px] uppercase tracking-widest flex items-center hover:gap-4 transition-all">Ver Slides <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transparência & Gráficos -->
+    <section id="transparencia" class="py-24 bg-slate-50 px-6 border-y border-slate-200">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-black text-center mb-16 italic text-slate-900 tracking-tighter uppercase">Dashboard de Transparência</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 text-center">
+                    <h4 class="text-[10px] font-black uppercase text-slate-400 mb-8 tracking-widest">Saúde Documental</h4>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2"><span>CNPJ Ativo</span><span class="text-green-600">100%</span></div>
+                            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-green-500 h-full" style="width: 100%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-2"><span>Conta PJ</span><span class="text-amber-500">20%</span></div>
+                            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-amber-500 h-full" style="width: 20%"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 flex flex-col items-center justify-center">
+                    <h4 class="text-[10px] font-black uppercase text-slate-400 mb-8 self-start tracking-widest">Regularização Fundiária</h4>
+                    <div class="relative w-32 h-32">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="12" fill="transparent" class="text-slate-100" />
+                            <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="12" fill="transparent" stroke-dasharray="364.4" stroke-dashoffset="109" class="text-blue-600" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center font-black text-2xl tracking-tighter italic">70%</div>
+                    </div>
+                </div>
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100">
+                    <h4 class="text-[10px] font-black uppercase text-slate-400 mb-8 tracking-widest">Captação Estratégica</h4>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-blue-50 rounded-2xl text-[10px] font-bold border border-blue-100 flex justify-between"><span>Cozinha MP-TO</span><span class="text-blue-600">EM REDAÇÃO</span></div>
+                        <div class="p-3 bg-green-50 rounded-2xl text-[10px] font-bold border border-green-100 flex justify-between"><span>Energia Solar</span><span class="text-green-600">PRÉ-APROVADO</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Evidências -->
+    <section id="evidencias" class="py-24 bg-white px-6">
+        <div class="container mx-auto text-center mb-12">
+            <h2 class="text-3xl font-black text-blue-900 uppercase tracking-tighter italic">Evidências de Campo</h2>
+        </div>
+        <div class="container mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="group overflow-hidden rounded-[2.5rem] shadow-xl border border-slate-100 aspect-video relative">
+                <img src="images/evidencia1.png" onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Evidencia 1">
+                <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 p-8 flex flex-col justify-end text-white">
+                    <h4 class="font-bold text-sm">Alinhamento Coordenadora e Equipe</h4>
+                </div>
+            </div>
+            <div class="group overflow-hidden rounded-[2.5rem] shadow-xl border border-slate-100 aspect-video relative">
+                <img src="images/evidencia2.png" onerror="this.src='https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Evidencia 2">
+                <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 p-8 flex flex-col justify-end text-white">
+                    <h4 class="font-bold text-sm">Alinhamento 29/04 - Planejamento</h4>
+                </div>
+            </div>
+            <div class="group overflow-hidden rounded-[2.5rem] shadow-xl border border-slate-100 aspect-video relative">
+                <img src="images/evidencia3.png" onerror="this.src='https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Evidencia 3">
+                <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 p-8 flex flex-col justify-end text-white">
+                    <h4 class="font-bold text-sm">Levantamento e Diagnóstico</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cronograma de Responsabilidades COMPLETO -->
+    <section id="cronograma" class="py-24 bg-slate-50 px-6 border-t border-slate-200">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-black text-center mb-12 text-slate-900 tracking-tighter uppercase italic">Cronograma de Responsabilidades</h2>
+            <div class="overflow-x-auto bg-white rounded-[3rem] shadow-2xl border border-slate-100">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-slate-900 text-white font-bold uppercase text-[9px] tracking-[0.2em]">
+                        <tr>
+                            <th class="px-8 py-6">Responsável</th>
+                            <th class="px-8 py-6">Demanda</th>
+                            <th class="px-8 py-6">Detalhamento</th>
+                            <th class="px-8 py-6">Início</th>
+                            <th class="px-8 py-6">Fim</th>
+                            <th class="px-8 py-6 text-center text-blue-400">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium italic">
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-8 py-6 font-black text-blue-700">Aymêh</td>
+                            <td class="px-8 py-6 text-slate-700">Gestão de Drive</td>
+                            <td class="px-8 py-6 text-[10px] text-slate-500">Organização de arquivos pesquisados e adequação para o Drive.</td>
+                            <td class="px-8 py-6 text-slate-400">18/04</td>
+                            <td class="px-8 py-6 text-slate-400">30/05</td>
+                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Pendente</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-8 py-6 font-black text-blue-700">Dora e Nathalia</td>
+                            <td class="px-8 py-6 text-slate-700">Pesquisa de Crédito</td>
+                            <td class="px-8 py-6 text-[10px] text-slate-500">Pesquisa detalhada sobre sucessos e falhas em linhas de crédito.</td>
+                            <td class="px-8 py-6 text-slate-400">18/04</td>
+                            <td class="px-8 py-6 text-slate-400">30/05</td>
+                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Pendente</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-8 py-6 font-black text-blue-700">Adriano e Daniel</td>
+                            <td class="px-8 py-6 text-slate-700">Questionários</td>
+                            <td class="px-8 py-6 text-[10px] text-slate-500">Perfil da associação no contexto social aplicado à líder comunitária.</td>
+                            <td class="px-8 py-6 text-slate-400">01/04</td>
+                            <td class="px-8 py-6 text-slate-400">30/05</td>
+                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Pendente</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-8 py-6 font-black text-blue-700">Ivan e Marcela</td>
+                            <td class="px-8 py-6 text-slate-700">Modelo de Projeto</td>
+                            <td class="px-8 py-6 text-[10px] text-slate-500">Modelo com linha de crédito pré-aprovada para implementação.</td>
+                            <td class="px-8 py-6 text-slate-400">01/04</td>
+                            <td class="px-8 py-6 text-slate-400">30/05</td>
+                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Pendente</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-8 py-6 font-black text-blue-700">Bruno e Pedro</td>
+                            <td class="px-8 py-6 text-slate-700">Levantamento Financeiro</td>
+                            <td class="px-8 py-6 text-[10px] text-slate-500">Análise de contas via Portal da Transparência da Associação.</td>
+                            <td class="px-8 py-6 text-slate-400">01/04</td>
+                            <td class="px-8 py-6 text-slate-400">30/05</td>
+                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Pendente</span></td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="px-8 py-6 font-black text-blue-700">Ana e Benedito</td>
+                            <td class="px-8 py-6 text-slate-700">Coordenação</td>
+                            <td class="px-8 py-6 text-[10px] text-slate-500">Consolidação do trabalho e organização das demandas do grupo.</td>
+                            <td class="px-8 py-6 text-slate-400">01/04</td>
+                            <td class="px-8 py-6 text-slate-400">30/05</td>
+                            <td class="px-8 py-6 text-center"><span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Em Curso</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="equipe" class="bg-slate-900 text-white pt-24 pb-12 px-6">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 border-b border-slate-800 pb-12 text-center md:text-left">
+                <div>
+                    <h5 class="text-blue-400 font-bold uppercase text-[10px] tracking-widest mb-6">Coordenação</h5>
+                    <p class="text-xl font-black italic">Prof.ª Karine Mota</p>
+                    <p class="text-[10px] text-slate-500 mt-2 uppercase font-bold tracking-widest">FASEC - Palmas/TO</p>
+                </div>
+                <div class="lg:col-span-2">
+                    <h5 class="text-slate-500 font-bold uppercase text-[10px] tracking-widest mb-6">Equipe Técnica</h5>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-y-2 text-[10px] text-slate-400 uppercase font-black italic">
+                        <span>• Ana Ferreira Alves</span><span>• Aymêh Ferreira</span><span>• Benedito Palheta</span>
+                        <span>• Dora Seijas</span><span>• Bruno Colicchio</span><span>• Juliana Santiago</span>
+                        <span>• Marcelo Junior</span><span>• Nathalia Morais</span><span>• Pedro Labanca</span>
+                        <span>• Vinícius Bruno</span><span>• Daniel Pereira</span>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center md:items-end">
+                    <h5 class="text-slate-500 font-bold uppercase text-[10px] tracking-widest mb-6">Redes Sociais</h5>
+                    <div class="flex gap-5 text-2xl mb-8">
+                        <a href="#" class="hover:text-blue-500 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-blue-700 transition"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-green-500 transition"><i class="fab fa-spotify"></i></a>
+                        <a href="#" class="hover:text-red-600 transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <p class="text-[9px] text-slate-700 font-black uppercase tracking-[0.4em]">Copyright &copy; 2026 ArarasPro</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal IA -->
+    <div id="iaModal" class="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white w-full max-w-4xl rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row h-[80vh]">
+            <div class="md:w-1/3 bg-blue-700 p-8 text-white flex flex-col justify-between">
+                <h3 id="modalTitle" class="text-2xl font-black mb-4 uppercase tracking-tighter">IA Consultiva</h3>
+                <p id="modalDesc" class="text-blue-100 text-[10px] italic leading-relaxed"></p>
+                <div class="bg-white/10 p-4 rounded-2xl border border-white/20 text-center uppercase tracking-widest text-[9px] font-black italic">ARARAS AI v1.0</div>
+            </div>
+            <div class="md:w-2/3 p-10 flex flex-col bg-slate-50 relative">
+                <button onclick="closeIAModal()" class="absolute top-6 right-6 text-slate-300 hover:text-slate-900"><i class="fas fa-times text-xl"></i></button>
+                <div class="flex-grow bg-white rounded-[2rem] border border-slate-200 p-6 overflow-y-auto mb-6 shadow-inner">
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded flex items-center justify-center"><i class="fas fa-robot text-xs"></i></div>
+                        <div class="bg-blue-50 p-4 rounded-2xl text-xs text-slate-700 italic tracking-tight font-medium">
+                            Identificando a Presidente <strong>Carolina Palma</strong>... Como posso auxiliar no preenchimento do documento?
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" placeholder="Instrução..." class="flex-grow p-4 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-600 outline-none">
+                    <button class="bg-blue-600 text-white px-6 py-4 rounded-xl hover:bg-blue-700 transition"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        function openIAModal(title, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            const modal = document.getElementById('iaModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('active-modal');
+        }
+        function closeIAModal() {
+            const modal = document.getElementById('iaModal');
+            modal.classList.remove('active-modal');
+            modal.classList.add('hidden');
+        }
+        window.onclick = function(event) {
+            const modal = document.getElementById('iaModal');
+            if (event.target == modal) { closeIAModal(); }
+        }
+    </script>
+</body>
+</html>
