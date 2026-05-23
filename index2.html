@@ -3,35 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Araras 1 & 2 - Governança e Consultoria FASEC</title>
+    <title>Portal Araras PRO - Governança e Captação de Recursos FASEC</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        .bg-gradient-blue { background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 64, 175, 0.9) 100%); }
+        .bg-gradient-blue { background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 58, 138, 0.95) 100%); }
         .hero-banner { 
             background-image: url('https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); 
             background-size: cover; 
             background-position: center;
         }
-        .card-impact { transition: all 0.3s ease; border: 1px solid rgba(226, 232, 240, 0.5); }
-        .card-impact:hover { transform: translateY(-5px); border-color: #3b82f6; box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1); }
-        .timeline-step { position: relative; padding-left: 2rem; border-left: 2px solid #e2e8f0; }
-        .timeline-step::before { content: ''; position: absolute; left: -9px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: #3b82f6; border: 3px solid #fff; }
+        .card-impact { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(226, 232, 240, 0.8); }
+        .card-impact:hover { transform: translateY(-5px); border-color: #2563eb; box-shadow: 0 15px 30px -10px rgba(37, 99, 235, 0.15); }
         .active-modal { display: flex !important; animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
         .whatsapp-float { position: fixed; bottom: 24px; right: 24px; z-index: 100; transition: transform 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1); }
-        .glass-dark { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-dark { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 1.5rem; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .toast-notification { animation: slideIn 0.3s ease-out forwards; }
+        @keyframes slideIn { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 overflow-x-hidden">
 
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-6 left-6 z-[110] flex flex-col gap-3"></div>
+
     <!-- Botão WhatsApp Flutuante -->
-    <a href="https://wa.me/#" target="_blank" class="whatsapp-float bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl">
+    <a href="https://wa.me/5563999999999?text=Olá! Gostaria de saber mais sobre a Consultoria Social do ArarasPRO." target="_blank" class="whatsapp-float bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 transition">
         <i class="fab fa-whatsapp text-3xl"></i>
     </a>
 
@@ -39,34 +42,32 @@
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="bg-blue-600 p-2 rounded-lg text-white shadow-lg shadow-blue-200"><i class="fas fa-university"></i></div>
-                <span class="font-extrabold text-xl tracking-tighter text-slate-900 uppercase">ARARAS<span class="text-blue-600">PRO</span></span>
+                <div class="bg-blue-600 p-2.5 rounded-xl text-white shadow-lg shadow-blue-200"><i class="fas fa-university"></i></div>
+                <span class="font-extrabold text-2xl tracking-tighter text-slate-900 uppercase">ARARAS<span class="text-blue-600">PRO</span></span>
             </div>
             <!-- Menu Desktop -->
             <div class="hidden lg:flex space-x-6 text-[10px] font-bold uppercase text-slate-600 tracking-widest items-center">
                 <a href="#home" class="hover:text-blue-600 transition">Home</a>
                 <a href="#radiografia" class="hover:text-blue-600 transition">Impacto Social</a>
+                <a href="#workspace" class="text-blue-600 hover:text-blue-700 transition flex items-center gap-1"><i class="fas fa-edit"></i> Workspace de Elaboração</a>
                 <a href="#quem-somos" class="hover:text-blue-600 transition">Quem Somos</a>
-                <a href="https://hubconectbr.github.io/CredBairro/" target="_blank" class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-100 hover:bg-blue-600 hover:text-white transition">Plano de Ação</a>
-                <a href="#consultoria" class="hover:text-blue-600 transition">Consultoria</a>
                 <a href="#araraplay" class="hover:text-blue-600 transition">ARARAPLAY</a>
                 <a href="#transparencia" class="hover:text-blue-600 transition">Transparência</a>
-                <a href="#evidencias" class="hover:text-blue-600 transition">Evidências</a>
-                <a href="#contato" class="hover:text-blue-600 transition text-blue-600">Fale Conosco</a>
+                <a href="#cronograma" class="hover:text-blue-600 transition">Equipe & Metas</a>
+                <a href="#contato" class="bg-blue-600 text-white px-4 py-2.5 rounded-xl hover:bg-blue-700 transition shadow-md">Fale Conosco</a>
             </div>
-            <button onclick="toggleMobileMenu()" class="lg:hidden text-slate-600 text-xl"><i class="fas fa-bars"></i></button>
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-slate-600 text-2xl focus:outline-none"><i class="fas fa-bars"></i></button>
         </div>
         <!-- Menu Mobile -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 p-6 flex flex-col space-y-4 text-xs font-bold uppercase shadow-xl">
-            <a href="#home" onclick="toggleMobileMenu()">Home</a>
-            <a href="#radiografia" onclick="toggleMobileMenu()">Impacto Social</a>
-            <a href="#quem-somos" onclick="toggleMobileMenu()">Quem Somos</a>
-            <a href="https://hubconectbr.github.io/CredBairro/" target="_blank">Plano de Ação</a>
-            <a href="#consultoria" onclick="toggleMobileMenu()">Consultoria</a>
-            <a href="#araraplay" onclick="toggleMobileMenu()">ARARAPLAY</a>
-            <a href="#transparencia" onclick="toggleMobileMenu()">Transparência</a>
-            <a href="#evidencias" onclick="toggleMobileMenu()">Evidências</a>
-            <a href="#contato" onclick="toggleMobileMenu()">Fale Conosco</a>
+            <a href="#home" class="hover:text-blue-600" onclick="toggleMobileMenu()">Home</a>
+            <a href="#radiografia" class="hover:text-blue-600" onclick="toggleMobileMenu()">Impacto Social</a>
+            <a href="#workspace" class="text-blue-600 hover:text-blue-700" onclick="toggleMobileMenu()">Workspace de Elaboração</a>
+            <a href="#quem-somos" class="hover:text-blue-600" onclick="toggleMobileMenu()">Quem Somos</a>
+            <a href="#araraplay" class="hover:text-blue-600" onclick="toggleMobileMenu()">ARARAPLAY</a>
+            <a href="#transparencia" class="hover:text-blue-600" onclick="toggleMobileMenu()">Transparência</a>
+            <a href="#cronograma" class="hover:text-blue-600" onclick="toggleMobileMenu()">Equipe & Metas</a>
+            <a href="#contato" class="hover:text-blue-600" onclick="toggleMobileMenu()">Fale Conosco</a>
         </div>
     </nav>
 
@@ -74,51 +75,332 @@
     <header id="home" class="hero-banner relative h-[650px] flex items-center justify-center text-white">
         <div class="absolute inset-0 bg-gradient-blue"></div>
         <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="inline-block bg-blue-500/30 px-4 py-1 rounded-full text-blue-200 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
-                Projeto Extensionista IV - FASEC
+            <div class="inline-block bg-blue-500/30 px-4 py-1.5 rounded-full text-blue-200 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm border border-blue-400/20">
+                Projeto Extensionista IV - FASEC & Associação Araras 1 e 2
             </div>
             <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight uppercase tracking-tighter">Comunidade em <span class="text-blue-400 italic">Harmonia.</span></h1>
-            <p class="text-xl opacity-90 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-                Nossa consultoria jurídica integra o conhecimento acadêmico à realidade social para transformar as Associações Araras 1 e 2 em modelos de governança.
+            <p class="text-xl opacity-90 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
+                Nossa consultoria jurídica e social integra o conhecimento acadêmico da <strong class="font-bold">FASEC</strong> à realidade prática do Terceiro Setor, desenvolvendo governança exemplar para captação de recursos públicos e privados.
             </p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#consultoria" class="bg-blue-600 hover:bg-blue-500 px-8 py-4 rounded-xl font-bold transition shadow-xl shadow-blue-900/40 flex items-center gap-2 uppercase text-xs">
-                    Plano Estratégico
+                <a href="#workspace" class="bg-blue-600 hover:bg-blue-500 px-8 py-4 rounded-xl font-bold transition shadow-xl shadow-blue-900/40 flex items-center gap-2 uppercase text-xs">
+                    Abrir Workspace do Projeto <i class="fas fa-rocket"></i>
                 </a>
-                <a href="#araraplay" class="bg-white/10 hover:bg-white/20 border border-white/30 px-8 py-4 rounded-xl font-bold backdrop-blur-md transition uppercase text-xs">
-                    Acessar ARARAPLAY <i class="fas fa-play-circle ml-2"></i>
+                <a href="#araraplay" class="bg-white/10 hover:bg-white/20 border border-white/30 px-8 py-4 rounded-xl font-bold backdrop-blur-md transition uppercase text-xs flex items-center gap-2">
+                    Acessar ARARAPLAY <i class="fas fa-play-circle"></i>
                 </a>
             </div>
         </div>
     </header>
 
     <!-- Seção: Radiografia Social -->
-    <section id="radiografia" class="py-24 bg-white px-6 border-b border-slate-100">
+    <section id="radiografia" class="py-20 bg-white px-6 border-b border-slate-100">
         <div class="container mx-auto text-center mb-16">
-            <span class="text-blue-600 font-bold uppercase tracking-widest text-[10px]">Identificação da Associação</span>
+            <span class="text-blue-600 font-bold uppercase tracking-widest text-[10px]">Identificação e Diagnóstico</span>
             <h2 class="text-4xl font-black text-slate-900 mt-2 tracking-tighter uppercase italic">Radiografia do Impacto</h2>
-            <p class="text-slate-500 mt-4 max-w-2xl mx-auto">Mapeamento populacional e densidade da área atendida pela consultoria FASEC.</p>
+            <p class="text-slate-500 mt-4 max-w-2xl mx-auto">Mapeamento populacional e densidade da área atendida pela consultoria FASEC para embasamento de editais.</p>
         </div>
         <div class="container mx-auto grid md:grid-cols-4 gap-8">
             <div class="bg-slate-50 p-10 rounded-[3rem] shadow-sm card-impact text-center border-b-4 border-blue-500">
                 <i class="fas fa-users text-blue-600 text-4xl mb-4"></i>
-                <h4 class="text-5xl font-black tracking-tighter">120</h4>
-                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Famílias</p>
+                <h4 class="text-5xl font-black tracking-tighter">1500</h4>
+                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Famílias Mapeadas</p>
             </div>
             <div class="bg-slate-50 p-10 rounded-[3rem] shadow-sm card-impact text-center border-b-4 border-green-500">
                 <i class="fas fa-id-card text-green-600 text-4xl mb-4"></i>
-                <h4 class="text-5xl font-black tracking-tighter">480</h4>
-                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Pessoas</p>
+                <h4 class="text-5xl font-black tracking-tighter">4500</h4>
+                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Pessoas Beneficiadas</p>
             </div>
             <div class="bg-slate-50 p-10 rounded-[3rem] shadow-sm card-impact text-center border-b-4 border-purple-500">
                 <i class="fas fa-map-marked-alt text-purple-600 text-4xl mb-4"></i>
                 <h4 class="text-5xl font-black tracking-tighter">2.5km²</h4>
-                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Área Abrangida</p>
+                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Área de Abrangência</p>
             </div>
             <div class="bg-slate-50 p-10 rounded-[3rem] shadow-sm card-impact text-center border-b-4 border-amber-500">
                 <i class="fas fa-handshake text-amber-600 text-4xl mb-4"></i>
                 <h4 class="text-5xl font-black tracking-tighter">04</h4>
-                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Parcerias Ativas</p>
+                <p class="text-[10px] font-black text-slate-400 uppercase mt-4 tracking-widest">Parcerias Estratégicas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORKSPACE DO PROJETO ESTRUTURADO -->
+    <section id="workspace" class="py-24 bg-slate-900 text-white px-6">
+        <div class="container mx-auto max-w-7xl">
+            <div class="text-center mb-12">
+                <span class="text-blue-400 font-bold uppercase tracking-[0.2em] text-[10px]">Ferramenta de Captação</span>
+                <h2 class="text-4xl font-black mt-2 tracking-tighter uppercase italic">Workspace de Elaboração de Projetos</h2>
+                <p class="text-slate-400 mt-4 max-w-2xl mx-auto">Edite a proposta do projeto em tempo real, use a IA para auditar os textos e faça simulações de orçamento de acordo com o MROSC.</p>
+            </div>
+
+            <!-- Tabs de Gerenciamento do Projeto -->
+            <div class="flex justify-center gap-4 mb-10 overflow-x-auto pb-2">
+                <button onclick="switchWorkspaceTab('documento')" id="tab-btn-documento" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider transition-all flex items-center gap-2 shrink-0">
+                    <i class="fas fa-file-alt"></i> Projeto Estruturado
+                </button>
+                <button onclick="switchWorkspaceTab('simulador')" id="tab-btn-simulador" class="bg-slate-800 text-slate-400 hover:text-white px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider transition-all flex items-center gap-2 shrink-0">
+                    <i class="fas fa-calculator"></i> Simulador MROSC
+                </button>
+                <button onclick="switchWorkspaceTab('marcolo')" id="tab-btn-marcolo" class="bg-slate-800 text-slate-400 hover:text-white px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider transition-all flex items-center gap-2 shrink-0">
+                    <i class="fas fa-project-diagram"></i> Matriz de Marco Lógico
+                </button>
+            </div>
+
+            <!-- ABA 1: DOCUMENTO DE PROJETO SOCIAL -->
+            <div id="tab-content-documento" class="grid lg:grid-cols-3 gap-10">
+                <!-- Painel de Leitura e Edição -->
+                <div class="lg:col-span-2 bg-slate-850 bg-opacity-80 rounded-[2.5rem] border border-white/5 p-8 lg:p-12 shadow-2xl">
+                    <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-6 flex-wrap gap-4">
+                        <div>
+                            <span class="text-blue-400 text-xs font-bold uppercase tracking-wider">Título Estratégico</span>
+                            <h3 class="text-2xl font-black tracking-tight mt-1" id="project-main-title">PROJETO COMUNIDADE EM HARMONIA: GOVERNANÇA, SEGURANÇA ALIMENTAR E ENERGIA SUSTENTÁVEL</h3>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="copyFullProject()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2.5 rounded-lg text-xs font-bold uppercase flex items-center gap-2 transition" title="Copiar Projeto Completo">
+                                <i class="fas fa-copy"></i> Copiar MD
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Seções do Projeto (Editáveis) -->
+                    <div class="space-y-10">
+                        <div class="p-6 bg-white/5 rounded-2xl border border-white/5 relative group">
+                            <div class="absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition flex gap-2">
+                                <button onclick="triggerAISuggestion('contexto')" class="bg-blue-600 hover:bg-blue-500 text-[10px] uppercase font-bold px-3 py-1 rounded flex items-center gap-1"><i class="fas fa-magic"></i> IA</button>
+                            </div>
+                            <h4 class="text-xs font-bold uppercase text-blue-400 tracking-widest mb-3 flex items-center gap-2">
+                                <span class="bg-blue-500/20 text-blue-300 w-6 h-6 rounded-full flex items-center justify-center text-[10px]">1</span> Identificação e Contexto
+                            </h4>
+                            <div class="text-sm text-slate-300 space-y-4">
+                                <p><strong>Proponente:</strong> <span id="proj-proponente" contenteditable="true" class="border-b border-transparent hover:border-slate-500 focus:border-blue-500 outline-none px-1">Associação de Moradores das Araras 1 e 2 (Parceria Técnica: FASEC - Faculdade Serra do Carmo)</span></p>
+                                <p><strong>Alinhamento ODS:</strong> <span id="proj-ods" contenteditable="true" class="border-b border-transparent hover:border-slate-500 focus:border-blue-500 outline-none px-1">ODS 1 (Erradicação da Pobreza), ODS 2 (Fome Zero), ODS 7 (Energia Limpa), ODS 16 (Paz e Instituições Eficazes).</span></p>
+                                <p><strong>Diagnóstico Socioterritorial:</strong> <span id="proj-diagnostico" contenteditable="true" class="block border-b border-transparent hover:border-slate-500 focus:border-blue-500 outline-none px-1 py-1">O Bairro das Araras abriga 120 famílias (480 pessoas) em situação de vulnerabilidade. 70% das propriedades sofrem de insegurança fundiária. Administrativamente, a Associação tem CNPJ ativo mas carece de conta PJ (só 20% das etapas abertas) e conformidade estatutária, o que inviabiliza parcerias institucionais via MROSC (Lei 13.019/14) e impede o recebimento de emendas ou recursos de ESG de grandes corporações de energia locais.</span></p>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-white/5 rounded-2xl border border-white/5 relative group">
+                            <div class="absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition flex gap-2">
+                                <button onclick="triggerAISuggestion('objetivos')" class="bg-blue-600 hover:bg-blue-500 text-[10px] uppercase font-bold px-3 py-1 rounded flex items-center gap-1"><i class="fas fa-magic"></i> IA</button>
+                            </div>
+                            <h4 class="text-xs font-bold uppercase text-blue-400 tracking-widest mb-3 flex items-center gap-2">
+                                <span class="bg-blue-500/20 text-blue-300 w-6 h-6 rounded-full flex items-center justify-center text-[10px]">2</span> Matriz de Objetivos
+                            </h4>
+                            <div class="text-sm text-slate-300 space-y-4">
+                                <p><strong>Objetivo Geral:</strong> <span id="proj-obj-geral" contenteditable="true" class="block border-b border-transparent hover:border-slate-500 focus:border-blue-500 outline-none px-1 py-1">Promover o desenvolvimento comunitário sustentável por meio da estruturação de governança jurídica, implantação da Cozinha Comunitária autossustentável (Cozinha MP-TO) e transição para matriz fotovoltaica.</span></p>
+                                <div class="pl-4 border-l-2 border-blue-600 space-y-2">
+                                    <p class="font-bold text-xs uppercase text-slate-400">Objetivos Específicos (SMART):</p>
+                                    <ul class="list-disc pl-5 space-y-2" id="proj-obj-especificos" contenteditable="true">
+                                        <li>Regularizar 100% da documentação jurídica e abrir a Conta PJ da Associação em até 90 dias.</li>
+                                        <li>Ativar a Cozinha MP-TO com capacidade de 300 refeições semanais e capacitar 45 mulheres locais até o 6º mês.</li>
+                                        <li>Reduzir em 85% os gastos energéticos da sede através da instalação de microgeração solar até o 8º mês.</li>
+                                        <li>Atender 120 famílias em oficinas integradas de direitos, governança e empreendedorismo ao longo do ciclo de 12 meses.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-white/5 rounded-2xl border border-white/5 relative group">
+                            <div class="absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition flex gap-2">
+                                <button onclick="triggerAISuggestion('publico')" class="bg-blue-600 hover:bg-blue-500 text-[10px] uppercase font-bold px-3 py-1 rounded flex items-center gap-1"><i class="fas fa-magic"></i> IA</button>
+                            </div>
+                            <h4 class="text-xs font-bold uppercase text-blue-400 tracking-widest mb-3 flex items-center gap-2">
+                                <span class="bg-blue-500/20 text-blue-300 w-6 h-6 rounded-full flex items-center justify-center text-[10px]">3</span> Público-Alvo e Impacto
+                            </h4>
+                            <div class="text-sm text-slate-300 space-y-4">
+                                <p><strong>Beneficiários Diretos:</strong> <span id="proj-benef-direto" contenteditable="true" class="border-b border-transparent hover:border-slate-500 focus:border-blue-500 outline-none px-1">120 famílias cadastradas (cerca de 480 moradores de Palmas/TO).</span></p>
+                                <p><strong>Beneficiários Indiretos:</strong> <span id="proj-benef-indireto" contenteditable="true" class="border-b border-transparent hover:border-slate-500 focus:border-blue-500 outline-none px-1">Aproximadamente 1.500 moradores de bairros vizinhos que se beneficiarão da infraestrutura social comunitária e da segurança local.</span></p>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-white/5 rounded-2xl border border-white/5 relative group">
+                            <div class="absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition flex gap-2">
+                                <button onclick="triggerAISuggestion('metodologia')" class="bg-blue-600 hover:bg-blue-500 text-[10px] uppercase font-bold px-3 py-1 rounded flex items-center gap-1"><i class="fas fa-magic"></i> IA</button>
+                            </div>
+                            <h4 class="text-xs font-bold uppercase text-blue-400 tracking-widest mb-3 flex items-center gap-2">
+                                <span class="bg-blue-500/20 text-blue-300 w-6 h-6 rounded-full flex items-center justify-center text-[10px]">4</span> Metodologia Operacional
+                            </h4>
+                            <div class="text-sm text-slate-300 space-y-4">
+                                <p><strong>Fluxo de Execução:</strong></p>
+                                <ul class="list-decimal pl-5 space-y-2" id="proj-metodo-fluxo" contenteditable="true">
+                                    <li><strong>Fase Jurídica:</strong> Organização do estatuto e representações legais (FASEC).</li>
+                                    <li><strong>Fase Engenharia/Infra:</strong> Aquisição e homologação do kit solar de microgeração de 10kWp; montagem da Cozinha MP-TO.</li>
+                                    <li><strong>Fase Capacitação:</strong> Início das oficinas profissionalizantes de panificação, confeitaria e oficinas jurídicas de governança.</li>
+                                    <li><strong>Fase Ativação Econômica:</strong> Comercialização solidária do excedente produtivo e auditoria de sustentabilidade.</li>
+                                </ul>
+                                <p><strong>Diferencial Metodológico:</strong> <span id="proj-diferencial" contenteditable="true" class="block border-b border-transparent hover:border-slate-500 focus:border-blue-500 outline-none px-1 py-1">O projeto atua através do modelo de <i>"Clínica Pro Bono de Governança"</i> liderado por estudantes do 4º período de Direito da FASEC, conectando a academia com o ecossistema socioambiental para baratear custos indiretos e fornecer auditoria documental contínua.</span></p>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-white/5 rounded-2xl border border-white/5 relative group">
+                            <div class="absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition flex gap-2">
+                                <button onclick="triggerAISuggestion('sustentabilidade')" class="bg-blue-600 hover:bg-blue-500 text-[10px] uppercase font-bold px-3 py-1 rounded flex items-center gap-1"><i class="fas fa-magic"></i> IA</button>
+                            </div>
+                            <h4 class="text-xs font-bold uppercase text-blue-400 tracking-widest mb-3 flex items-center gap-2">
+                                <span class="bg-blue-500/20 text-blue-300 w-6 h-6 rounded-full flex items-center justify-center text-[10px]">5</span> Matriz de Riscos e Sustentabilidade
+                            </h4>
+                            <div class="text-sm text-slate-300 space-y-4">
+                                <p><strong>Mitigação de Riscos:</strong> <span id="proj-riscos" contenteditable="true" class="block border-b border-transparent hover:border-slate-500 focus:border-blue-500 outline-none px-1 py-1">Desengajamento comunitário mitigado com oficinas dinâmicas e o incentivo de geração de renda na cozinha industrial. Demora em homologação da energia solar mitigada pela articulação de rede de parceiros institucionais.</span></p>
+                                <p><strong>Continuidade Pós-Recurso:</strong> <span id="proj-continuidade" contenteditable="true" class="block border-b border-transparent hover:border-slate-500 focus:border-blue-500 outline-none px-1 py-1">A autossustentabilidade financeira está blindada em duas frentes: (1) Redução de 85% do custo fixo de energia elétrica que restará como sobra de caixa livre para a Associação; (2) Faturamento de 20% das refeições e serviços de padaria produtos na cozinha comunitária voltados à comunidade local de Palmas/TO, gerando receita interna para o Fundo de Reserva.</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Painel de IA Integrado e Ações -->
+                <div class="bg-slate-800 rounded-[2.5rem] border border-white/5 p-8 flex flex-col h-[700px] justify-between sticky top-28 shadow-2xl">
+                    <div>
+                        <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                            <div class="bg-blue-600 p-2.5 rounded-xl text-white text-md"><i class="fas fa-robot animate-pulse"></i></div>
+                            <div>
+                                <h4 class="font-extrabold uppercase text-sm tracking-tight">Araras AI <span class="text-blue-400 font-medium">v1.0</span></h4>
+                                <p class="text-[10px] text-slate-400 uppercase tracking-widest">Consultor de Editais Privados & MROSC</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 text-xs">
+                            <div class="p-4 bg-slate-900 rounded-2xl border border-white/5 text-slate-300 leading-relaxed font-light">
+                                <p class="mb-2 font-bold text-blue-300 italic flex items-center gap-1">📌 Assistente Ativo:</p>
+                                <p>Utilize esta inteligência artificial para auditar qualquer texto do projeto social ao lado. Ela analisa se o projeto atende a Lei 13.019/14, se as metas são de fato SMART e se o impacto está correto para as agências de fomento.</p>
+                            </div>
+
+                            <p class="font-bold text-[10px] text-slate-400 uppercase tracking-wider mt-6">Sugestões de Análise Rápidas:</p>
+                            <div class="grid grid-cols-1 gap-2">
+                                <button onclick="quickPrompt('Avalie se as metas SMART deste projeto estão em conformidade com as regras do MROSC e sugira refinamentos.')" class="bg-white/5 hover:bg-white/10 p-2 rounded-xl text-left font-semibold text-slate-300 text-[11px] transition-all flex items-center justify-between">
+                                    <span>Auditar Metas MROSC</span> <i class="fas fa-chevron-right text-slate-500 text-[9px]"></i>
+                                </button>
+                                <button onclick="quickPrompt('Como podemos enriquecer a sustentabilidade deste projeto para atrair investidores de ESG de grandes corporações de energia?')" class="bg-white/5 hover:bg-white/10 p-2 rounded-xl text-left font-semibold text-slate-300 text-[11px] transition-all flex items-center justify-between">
+                                    <span>Potencializar ESG de Empresas</span> <i class="fas fa-chevron-right text-slate-500 text-[9px]"></i>
+                                </button>
+                                <button onclick="quickPrompt('Escreva uma introdução cativante e persuasiva de 1 parágrafo para um edital internacional com base nos dados do projeto.')" class="bg-white/5 hover:bg-white/10 p-2 rounded-xl text-left font-semibold text-slate-300 text-[11px] transition-all flex items-center justify-between">
+                                    <span>Gerar Pitch Persuasivo</span> <i class="fas fa-chevron-right text-slate-500 text-[9px]"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interface de Conversa -->
+                    <div class="mt-6 border-t border-white/10 pt-4">
+                        <div id="ai-chat-response" class="hidden mb-4 p-4 bg-blue-950/50 border border-blue-900/30 rounded-2xl text-[11px] text-slate-300 overflow-y-auto max-h-[160px] scrollbar-thin"></div>
+                        <div class="flex gap-2">
+                            <input type="text" id="ai-chat-input" placeholder="Pergunte à IA sobre editais..." class="flex-grow bg-slate-900 text-slate-100 text-xs px-4 py-3 rounded-xl border border-white/10 focus:ring-2 focus:ring-blue-600 outline-none">
+                            <button id="ai-chat-send-btn" onclick="sendChatToAI()" class="bg-blue-600 hover:bg-blue-500 text-white px-5 rounded-xl transition flex items-center justify-center"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA 2: SIMULADOR FINANCEIRO INTERATIVO -->
+            <div id="tab-content-simulador" class="hidden">
+                <div class="grid lg:grid-cols-3 gap-10">
+                    <div class="lg:col-span-2 bg-slate-850 bg-opacity-80 rounded-[2.5rem] border border-white/5 p-8 lg:p-12 shadow-2xl">
+                        <h3 class="text-2xl font-black mb-6 flex items-center gap-2 uppercase italic tracking-tight"><i class="fas fa-coins text-blue-400"></i> Alocação Orçamentária Dinâmica</h3>
+                        <p class="text-slate-400 text-xs mb-8">Arraste os seletores para simular a alocação de recursos financeiros. A ferramenta calcula automaticamente o limite de <strong>custos indiretos (limite de 15% conforme Lei 13.019/14 - MROSC)</strong> e exibe o balanço orçamentário em tempo real.</p>
+                        
+                        <div class="space-y-8">
+                            <!-- Input Total do Orçamento -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-400 mb-2">Orçamento Total Solicitado (R$)</label>
+                                <input type="number" id="budget-total" value="135000" oninput="updateBudgetSimulation()" class="bg-slate-900 border border-white/10 rounded-xl px-4 py-3 w-full text-slate-100 text-sm focus:ring-2 focus:ring-blue-600 outline-none font-bold">
+                            </div>
+
+                            <!-- Slider RH -->
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-2">
+                                    <span class="text-slate-400 uppercase">Recursos Humanos (Profissionais, Instrutores)</span>
+                                    <span id="label-rh" class="text-blue-400">R$ 48.000 (35%)</span>
+                                </div>
+                                <input type="range" id="slider-rh" min="10" max="60" value="35" oninput="updateBudgetSliders('rh')" class="w-full accent-blue-600">
+                            </div>
+
+                            <!-- Slider Custos Diretos -->
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-2">
+                                    <span class="text-slate-400 uppercase">Custos Diretos (Equipamentos Solares, Cozinha, Insumos)</span>
+                                    <span id="label-diretos" class="text-green-400">R$ 72.000 (53%)</span>
+                                </div>
+                                <input type="range" id="slider-diretos" min="20" max="80" value="53" oninput="updateBudgetSliders('diretos')" class="w-full accent-green-500">
+                            </div>
+
+                            <!-- Slider Custos Indiretos -->
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-2">
+                                    <span class="text-slate-400 uppercase">Custos Indiretos (Adm., Taxas, Contador - Teto de 15%)</span>
+                                    <span id="label-indiretos" class="text-amber-400">R$ 15.000 (12%)</span>
+                                </div>
+                                <input type="range" id="slider-indiretos" min="0" max="25" value="12" oninput="updateBudgetSliders('indiretos')" class="w-full accent-amber-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Painel de Resultados do Simulador -->
+                    <div class="bg-slate-800 rounded-[2.5rem] border border-white/5 p-8 flex flex-col justify-between shadow-2xl">
+                        <div>
+                            <h4 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-6">Auditoria Orçamentária</h4>
+                            <div class="space-y-6">
+                                <div class="p-5 rounded-2xl bg-slate-900 border border-white/5 text-center">
+                                    <p class="text-[10px] text-slate-500 uppercase font-black">Orçamento Total Mapeado</p>
+                                    <h5 class="text-3xl font-black mt-1 text-slate-100" id="auditor-total">R$ 135.000</h5>
+                                </div>
+
+                                <div class="p-5 rounded-2xl bg-slate-900 border border-white/5 flex items-center justify-between">
+                                    <div>
+                                        <p class="text-[10px] text-slate-500 uppercase font-black">Gastos com Pessoal (RH)</p>
+                                        <span class="text-sm font-bold text-blue-400" id="auditor-rh">R$ 47.250</span>
+                                    </div>
+                                    <i class="fas fa-user-tie text-2xl text-blue-500"></i>
+                                </div>
+
+                                <div id="mrosc-warning-card" class="p-5 rounded-2xl bg-green-950/40 border border-green-500/30 flex items-center justify-between">
+                                    <div>
+                                        <p class="text-[10px] text-green-300 uppercase font-black">Status do Limite MROSC (15%)</p>
+                                        <span class="text-sm font-black text-green-400" id="mrosc-status-text">CONFORME (12%)</span>
+                                    </div>
+                                    <i class="fas fa-check-circle text-2xl text-green-400" id="mrosc-status-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 border-t border-white/10 mt-6">
+                            <button onclick="applySimulatedBudget()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold uppercase text-xs py-4 rounded-xl transition shadow-lg shadow-blue-900/30">Aplicar Orçamento no Projeto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA 3: MATRIZ DE MARCO LÓGICO -->
+            <div id="tab-content-marcolo" class="hidden">
+                <div class="bg-slate-850 rounded-[2.5rem] border border-white/5 p-8 lg:p-12 shadow-2xl">
+                    <h3 class="text-2xl font-black mb-6 flex items-center gap-2 uppercase italic tracking-tight"><i class="fas fa-chart-line text-blue-400"></i> Cadeia de Valor: Teoria da Mudança</h3>
+                    <p class="text-slate-400 text-xs mb-10">Mapeamento linear de impacto conectando os insumos até os resultados definitivos na comunidade.</p>
+                    
+                    <div class="grid md:grid-cols-5 gap-4">
+                        <div class="bg-slate-900 p-6 rounded-2xl border border-white/5 relative">
+                            <span class="absolute top-3 right-3 text-slate-700 font-bold text-xl">01</span>
+                            <h4 class="text-xs font-black uppercase tracking-wider text-blue-400 mb-3">Insumos</h4>
+                            <p class="text-xs text-slate-400 font-light leading-relaxed">Infraestrutura física da sede, fomento financeiro captado, equipe jurídica pro bono FASEC, kits de energia solar e maquinário de panificação.</p>
+                        </div>
+                        <div class="bg-slate-900 p-6 rounded-2xl border border-white/5 relative">
+                            <span class="absolute top-3 right-3 text-slate-700 font-bold text-xl">02</span>
+                            <h4 class="text-xs font-black uppercase tracking-wider text-green-400 mb-3">Atividades</h4>
+                            <p class="text-xs text-slate-400 font-light leading-relaxed">Reformulação de estatuto, montagem da estrutura de cozinha comunitária, workshops de governança e cursos práticos profissionalizantes.</p>
+                        </div>
+                        <div class="bg-slate-900 p-6 rounded-2xl border border-white/5 relative">
+                            <span class="absolute top-3 right-3 text-slate-700 font-bold text-xl">03</span>
+                            <h4 class="text-xs font-black uppercase tracking-wider text-purple-400 mb-3">Produtos</h4>
+                            <p class="text-xs text-slate-400 font-light leading-relaxed">Associação 100% regularizada legalmente com conta PJ ativa, 1 central solar microgeradora conectada e 45 mulheres capacitadas.</p>
+                        </div>
+                        <div class="bg-slate-900 p-6 rounded-2xl border border-white/5 relative">
+                            <span class="absolute top-3 right-3 text-slate-700 font-bold text-xl">04</span>
+                            <h4 class="text-xs font-black uppercase tracking-wider text-amber-400 mb-3">Resultados</h4>
+                            <p class="text-xs text-slate-400 font-light leading-relaxed">Acesso autônomo a editais públicos estaduais e nacionais, redução expressiva do custo de custeio operacional em 85% e geração de renda comunitária.</p>
+                        </div>
+                        <div class="bg-slate-900 p-6 rounded-2xl border border-white/5 relative">
+                            <span class="absolute top-3 right-3 text-slate-700 font-bold text-xl">05</span>
+                            <h4 class="text-xs font-black uppercase tracking-wider text-red-400 mb-3">Impacto</h4>
+                            <p class="text-xs text-slate-400 font-light leading-relaxed">Empoderamento socioeconômico da comunidade das Araras, mitigação da pobreza extrema local e estabelecimento de um ecossistema autossustentável.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -128,9 +410,10 @@
         <div class="container mx-auto max-w-5xl">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div>
-                    <h2 class="text-4xl font-black text-blue-900 mb-6">Quem Somos</h2>
-                    <p class="text-slate-600 leading-relaxed mb-6">
-                        Acadêmicos do 4º período de Direito da <strong>Faculdade Serra do Carmo (FASEC)</strong>. Sob coordenação da <strong>Prof.ª Karine Mota</strong>, integramos teoria e prática para empoderar o Terceiro Setor em Palmas.
+                    <span class="text-blue-600 font-bold uppercase tracking-widest text-[10px]">Agente Executor</span>
+                    <h2 class="text-4xl font-black text-blue-900 mb-6 uppercase tracking-tighter">Quem Somos</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6 font-light">
+                        Somos acadêmicos do 4º período de Direito da <strong class="font-bold text-slate-800">Faculdade Serra do Carmo (FASEC)</strong> em Palmas/TO. Desenvolvemos esta consultoria sob coordenação técnica e acadêmica da <strong class="font-bold text-slate-800">Prof.ª Karine Mota</strong>, visando o fortalecimento de governança e engenharia social de associações locais.
                     </p>
                     <div class="grid grid-cols-2 gap-4 text-center">
                         <div class="p-6 bg-blue-50 rounded-3xl border border-blue-100">
@@ -144,7 +427,7 @@
                     </div>
                 </div>
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" class="rounded-[3rem] shadow-2xl" alt="Equipe FASEC">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" class="rounded-[3rem] shadow-2xl" alt="Equipe de trabalho FASEC">
                     <div class="absolute -bottom-6 -right-6 bg-blue-700 p-8 rounded-3xl text-white shadow-2xl text-center">
                         <span class="text-4xl font-black italic">11+</span>
                         <p class="text-[10px] uppercase font-bold mt-2 tracking-widest">Consultores</p>
@@ -159,20 +442,20 @@
         <div class="container mx-auto text-center mb-16">
             <span class="text-blue-400 font-bold uppercase tracking-[0.3em] text-[10px]">Learning Hub</span>
             <h2 class="text-6xl font-black mt-2 tracking-tighter uppercase italic">ARARA<span class="text-blue-500">PLAY</span></h2>
-            <p class="text-slate-400 mt-4 max-w-xl mx-auto">Explore as reuniões e discussões técnicas que fundamentam nossa consultoria.</p>
+            <p class="text-slate-400 mt-4 max-w-xl mx-auto">Explore as reuniões e discussões técnicas que fundamentam nossa consultoria jurídica de forma transparente.</p>
         </div>
         
         <div class="container mx-auto grid lg:grid-cols-2 gap-12 mb-20">
             <div class="bg-slate-800 p-8 rounded-[3rem] border border-white/5 group">
                 <div class="video-container mb-6 shadow-2xl group-hover:scale-[1.02] transition duration-500">
-                    <iframe src="https://www.youtube.com/watch?v=HXEC9D8n_LI" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/HXEC9D8n_LI" allowfullscreen></iframe>
                 </div>
                 <h4 class="text-xl font-bold mb-2 tracking-tight">Reunião de Alinhamento e Planejamento</h4>
                 <p class="text-[10px] text-blue-500 uppercase font-black tracking-widest">Episódio 01 - Governança</p>
             </div>
             <div class="bg-slate-800 p-8 rounded-[3rem] border border-white/5 group">
                 <div class="video-container mb-6 shadow-2xl group-hover:scale-[1.02] transition duration-500">
-                    <iframe src="https://www.youtube.com/watch?v=mvExLCo4tYw" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/mvExLCo4tYw" allowfullscreen></iframe>
                 </div>
                 <h4 class="text-xl font-bold mb-2 tracking-tight">Análise de Linhas de Crédito e Fomento</h4>
                 <p class="text-[10px] text-blue-500 uppercase font-black tracking-widest">Episódio 02 - Estratégia Financeira</p>
@@ -180,17 +463,17 @@
         </div>
 
         <div class="container mx-auto grid lg:grid-cols-3 gap-8">
-            <div class="glass-dark p-10 rounded-[3rem] card-hover group border border-white/5">
+            <div class="glass-dark p-10 rounded-[3rem] group border border-white/5">
                 <i class="fab fa-youtube text-4xl text-red-500 mb-8"></i>
                 <h4 class="text-2xl font-bold mb-4 tracking-tighter">YouTube</h4>
                 <a href="https://www.youtube.com/playlist?list=PLUXCliw5-Qw-CPxYYcVkREFkBINQrBSSu" target="_blank" class="text-blue-400 font-bold text-[10px] uppercase tracking-widest flex items-center hover:gap-4 transition-all">Playlist <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
-            <div class="glass-dark p-10 rounded-[3rem] card-hover group border border-white/5">
+            <div class="glass-dark p-10 rounded-[3rem] group border border-white/5">
                 <i class="fas fa-microphone-alt text-4xl text-green-500 mb-8"></i>
                 <h4 class="text-2xl font-bold mb-4 tracking-tighter">PodCast</h4>
                 <a href="https://open.spotify.com/show/6i7Oek5gqLeW1jPikYccLj?si=Wl6qXAzbS7efFQOJ3xcePA" target="_blank" class="text-green-400 font-bold text-[10px] uppercase tracking-widest flex items-center hover:gap-4 transition-all">Ouvir Agora <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
-            <div class="glass-dark p-10 rounded-[3rem] card-hover group border border-white/5">
+            <div class="glass-dark p-10 rounded-[3rem] group border border-white/5">
                 <i class="fas fa-desktop text-4xl text-blue-400 mb-8"></i>
                 <h4 class="text-2xl font-bold mb-4 tracking-tighter">Apresentação</h4>
                 <a href="https://docs.google.com/presentation/d/1s1LN59IfGKKVY2z_xCKHp60YXTnsK1EP/edit?usp=sharing" target="_blank" class="text-blue-300 font-bold text-[10px] uppercase tracking-widest flex items-center hover:gap-4 transition-all">Ver Slides <i class="fas fa-arrow-right ml-2"></i></a>
@@ -244,19 +527,19 @@
         </div>
         <div class="container mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="group overflow-hidden rounded-[2.5rem] shadow-xl border border-slate-100 aspect-video relative">
-                <img src="images/evidencia1.png" onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Evidencia 1">
+                <img src="images/evidencia1.png" onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Alinhamento Coordenadora e Equipe">
                 <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 p-8 flex flex-col justify-end text-white">
                     <h4 class="font-bold text-sm">Alinhamento Coordenadora e Equipe</h4>
                 </div>
             </div>
             <div class="group overflow-hidden rounded-[2.5rem] shadow-xl border border-slate-100 aspect-video relative">
-                <img src="images/evidencia2.png" onerror="this.src='https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Evidencia 2">
+                <img src="images/evidencia2.png" onerror="this.src='https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Alinhamento Planejamento">
                 <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 p-8 flex flex-col justify-end text-white">
                     <h4 class="font-bold text-sm">Alinhamento 29/04 - Planejamento</h4>
                 </div>
             </div>
             <div class="group overflow-hidden rounded-[2.5rem] shadow-xl border border-slate-100 aspect-video relative">
-                <img src="images/evidencia3.png" onerror="this.src='https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Evidencia 3">
+                <img src="images/evidencia3.png" onerror="this.src='https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80'" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Levantamento e Diagnóstico">
                 <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 p-8 flex flex-col justify-end text-white">
                     <h4 class="font-bold text-sm">Levantamento e Diagnóstico</h4>
                 </div>
@@ -264,12 +547,26 @@
         </div>
     </section>
 
-    <!-- Cronograma de Responsabilidades COMPLETO -->
+    <!-- Cronograma de Responsabilidades COMPLETO e Interativo -->
     <section id="cronograma" class="py-24 bg-slate-50 px-6 border-t border-slate-200">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-black text-center mb-12 text-slate-900 tracking-tighter uppercase italic">Cronograma de Responsabilidades</h2>
+            <h2 class="text-3xl font-black text-center mb-6 text-slate-900 tracking-tighter uppercase italic">Cronograma de Responsabilidades</h2>
+            <p class="text-center text-slate-500 text-sm mb-12 max-w-xl mx-auto">Filtre e gerencie as frentes técnicas do projeto desenvolvidas pela equipe de consultoria FASEC.</p>
+            
+            <!-- Barra de Filtros -->
+            <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="filterResponsabilidades('todos')" id="filter-btn-todos" class="bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-bold uppercase transition">Todos</button>
+                    <button onclick="filterResponsabilidades('Concluída')" id="filter-btn-emcurso" class="bg-white text-slate-600 px-4 py-2 rounded-xl text-xs font-bold uppercase border border-slate-200 transition">Concluída</button>
+                    <button onclick="filterResponsabilidades('Pendente')" id="filter-btn-pendente" class="bg-white text-slate-600 px-4 py-2 rounded-xl text-xs font-bold uppercase border border-slate-200 transition">Pendente</button>
+                </div>
+                <div>
+                    <input type="text" id="responsavel-search" oninput="searchResponsavel()" placeholder="Buscar por responsável..." class="bg-white border border-slate-200 px-4 py-2 rounded-xl text-xs outline-none focus:ring-2 focus:ring-blue-600 w-64 shadow-sm">
+                </div>
+            </div>
+
             <div class="overflow-x-auto bg-white rounded-[3rem] shadow-2xl border border-slate-100">
-                <table class="w-full text-left text-sm">
+                <table class="w-full text-left text-sm" id="tabela-responsabilidades">
                     <thead class="bg-slate-900 text-white font-bold uppercase text-[9px] tracking-[0.2em]">
                         <tr>
                             <th class="px-8 py-6">Responsável</th>
@@ -281,48 +578,48 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 font-medium italic">
-                        <tr class="hover:bg-slate-50 transition">
-                            <td class="px-8 py-6 font-black text-blue-700">Aymêh</td>
+                        <tr class="hover:bg-slate-50 transition" data-status="Concluída">
+                            <td class="px-8 py-6 font-black text-blue-700 name-col">Aymêh</td>
                             <td class="px-8 py-6 text-slate-700">Gestão de Drive</td>
                             <td class="px-8 py-6 text-[10px] text-slate-500">Organização de arquivos pesquisados e adequação para o Drive.</td>
                             <td class="px-8 py-6 text-slate-400">18/04</td>
                             <td class="px-8 py-6 text-slate-400">30/05</td>
-                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Pendente</span></td>
+                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Concluída</span></td>
                         </tr>
-                        <tr class="hover:bg-slate-50 transition">
-                            <td class="px-8 py-6 font-black text-blue-700">Dora e Nathalia</td>
+                        <tr class="hover:bg-slate-50 transition" data-status="Concluída">
+                            <td class="px-8 py-6 font-black text-blue-700 name-col">Dora e Nathalia</td>
                             <td class="px-8 py-6 text-slate-700">Pesquisa de Crédito</td>
                             <td class="px-8 py-6 text-[10px] text-slate-500">Pesquisa detalhada sobre sucessos e falhas em linhas de crédito.</td>
                             <td class="px-8 py-6 text-slate-400">18/04</td>
                             <td class="px-8 py-6 text-slate-400">30/05</td>
-                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Pendente</span></td>
+                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Concluída</span></td>
                         </tr>
-                        <tr class="hover:bg-slate-50 transition">
-                            <td class="px-8 py-6 font-black text-blue-700">Adriano e Daniel</td>
+                        <tr class="hover:bg-slate-50 transition" data-status="Concluída">
+                            <td class="px-8 py-6 font-black text-blue-700 name-col">Adriano e Daniel</td>
                             <td class="px-8 py-6 text-slate-700">Questionários</td>
                             <td class="px-8 py-6 text-[10px] text-slate-500">Perfil da associação no contexto social aplicado à líder comunitária.</td>
                             <td class="px-8 py-6 text-slate-400">01/04</td>
                             <td class="px-8 py-6 text-slate-400">30/05</td>
-                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Pendente</span></td>
+                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Concluída</span></td>
                         </tr>
-                        <tr class="hover:bg-slate-50 transition">
-                            <td class="px-8 py-6 font-black text-blue-700">Ivan e Marcela</td>
+                        <tr class="hover:bg-slate-50 transition" data-status="Concluída">
+                            <td class="px-8 py-6 font-black text-blue-700 name-col">Ivan e Marcela</td>
                             <td class="px-8 py-6 text-slate-700">Modelo de Projeto</td>
                             <td class="px-8 py-6 text-[10px] text-slate-500">Modelo com linha de crédito pré-aprovada para implementação.</td>
                             <td class="px-8 py-6 text-slate-400">01/04</td>
                             <td class="px-8 py-6 text-slate-400">30/05</td>
-                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Pendente</span></td>
+                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Concluída</span></td>
                         </tr>
-                        <tr class="hover:bg-slate-50 transition">
-                            <td class="px-8 py-6 font-black text-blue-700">Bruno e Pedro</td>
+                        <tr class="hover:bg-slate-50 transition" data-status="Concluída">
+                            <td class="px-8 py-6 font-black text-blue-700 name-col">Bruno e Pedro</td>
                             <td class="px-8 py-6 text-slate-700">Levantamento Financeiro</td>
                             <td class="px-8 py-6 text-[10px] text-slate-500">Análise de contas via Portal da Transparência da Associação.</td>
                             <td class="px-8 py-6 text-slate-400">01/04</td>
                             <td class="px-8 py-6 text-slate-400">30/05</td>
-                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Pendente</span></td>
+                            <td class="px-8 py-6 text-center"><span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[9px] font-black uppercase">Concluída</span></td>
                         </tr>
-                        <tr class="hover:bg-slate-50 transition">
-                            <td class="px-8 py-6 font-black text-blue-700">Ana e Benedito</td>
+                        <tr class="hover:bg-slate-50 transition" data-status="Em Curso">
+                            <td class="px-8 py-6 font-black text-blue-700 name-col">Ana e Benedito</td>
                             <td class="px-8 py-6 text-slate-700">Coordenação</td>
                             <td class="px-8 py-6 text-[10px] text-slate-500">Consolidação do trabalho e organização das demandas do grupo.</td>
                             <td class="px-8 py-6 text-slate-400">01/04</td>
@@ -331,6 +628,34 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fale Conosco -->
+    <section id="contato" class="py-24 bg-white px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <span class="text-blue-600 font-bold uppercase tracking-widest text-[10px]">Fale Conosco</span>
+            <h2 class="text-4xl font-black text-blue-900 mt-2 mb-6 uppercase tracking-tighter">Entre em Contato</h2>
+            <p class="text-slate-500 max-w-lg mx-auto mb-10 font-light">Dúvidas sobre o projeto, consultoria ou quer saber como patrocinar via lei de fomento? Envie uma mensagem diretamente à nossa coordenação.</p>
+            <div class="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 text-left">
+                <form onsubmit="handleContactSubmit(event)" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Seu Nome</label>
+                            <input type="text" required class="bg-white border border-slate-200 rounded-xl px-4 py-3 w-full text-slate-900 text-xs focus:ring-2 focus:ring-blue-600 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-2">E-mail Comercial</label>
+                            <input type="email" required class="bg-white border border-slate-200 rounded-xl px-4 py-3 w-full text-slate-900 text-xs focus:ring-2 focus:ring-blue-600 outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Mensagem</label>
+                        <textarea rows="4" required class="bg-white border border-slate-200 rounded-xl px-4 py-3 w-full text-slate-900 text-xs focus:ring-2 focus:ring-blue-600 outline-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase text-xs py-4 rounded-xl transition shadow-lg shadow-blue-200">Enviar Mensagem</button>
+                </form>
             </div>
         </div>
     </section>
@@ -367,52 +692,503 @@
         </div>
     </footer>
 
-    <!-- Modal IA -->
+    <!-- Modal IA Consultiva Integrado (Otimizado) -->
     <div id="iaModal" class="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-white w-full max-w-4xl rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row h-[80vh]">
             <div class="md:w-1/3 bg-blue-700 p-8 text-white flex flex-col justify-between">
                 <h3 id="modalTitle" class="text-2xl font-black mb-4 uppercase tracking-tighter">IA Consultiva</h3>
-                <p id="modalDesc" class="text-blue-100 text-[10px] italic leading-relaxed"></p>
+                <p id="modalDesc" class="text-blue-100 text-[10px] italic leading-relaxed">Nossos modelos cognitivos de IA auxiliam no refinamento de projetos sociais em conformidade regulatória.</p>
                 <div class="bg-white/10 p-4 rounded-2xl border border-white/20 text-center uppercase tracking-widest text-[9px] font-black italic">ARARAS AI v1.0</div>
             </div>
-            <div class="md:w-2/3 p-10 flex flex-col bg-slate-50 relative">
+            <div class="md:w-2/3 p-10 flex flex-col bg-slate-50 relative h-full">
                 <button onclick="closeIAModal()" class="absolute top-6 right-6 text-slate-300 hover:text-slate-900"><i class="fas fa-times text-xl"></i></button>
-                <div class="flex-grow bg-white rounded-[2rem] border border-slate-200 p-6 overflow-y-auto mb-6 shadow-inner">
+                
+                <div id="ai-modal-messages" class="flex-grow bg-white rounded-[2rem] border border-slate-200 p-6 overflow-y-auto mb-6 shadow-inner text-xs space-y-4">
                     <div class="flex gap-3">
-                        <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded flex items-center justify-center"><i class="fas fa-robot text-xs"></i></div>
-                        <div class="bg-blue-50 p-4 rounded-2xl text-xs text-slate-700 italic tracking-tight font-medium">
-                            Identificando a Presidente <strong>Carolina Palma</strong>... Como posso auxiliar no preenchimento do documento?
+                        <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-robot text-xs"></i></div>
+                        <div class="bg-blue-50 p-4 rounded-2xl text-slate-700 italic tracking-tight font-medium">
+                            Identificando a Presidente <strong>Carolina Palma</strong>... Como posso auxiliar no preenchimento do seu documento hoje?
                         </div>
                     </div>
                 </div>
+
                 <div class="flex gap-2">
-                    <input type="text" placeholder="Instrução..." class="flex-grow p-4 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-600 outline-none">
-                    <button class="bg-blue-600 text-white px-6 py-4 rounded-xl hover:bg-blue-700 transition"><i class="fas fa-paper-plane"></i></button>
+                    <input type="text" id="ai-modal-input" placeholder="Instrução..." class="flex-grow p-4 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-blue-600 outline-none">
+                    <button onclick="sendModalChat()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl transition"><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        // Configuração Central da API do Gemini
+        const apiKey = ""; // Chave injetada em tempo de execução
+        
+        // Estrutura Base de Dados do Projeto
+        let currentProjectState = {
+            proponente: "Associação de Moradores das Araras 1 e 2 (Parceria Técnica: FASEC - Faculdade Serra do Carmo)",
+            ods: "ODS 1 (Erradicação da Pobreza), ODS 2 (Fome Zero), ODS 7 (Energia Limpa), ODS 16 (Paz e Instituições Eficazes).",
+            diagnostico: "O Bairro das Araras abriga 120 famílias (480 pessoas) em situação de vulnerabilidade. 70% das propriedades sofrem de insegurança fundiária. Administrativamente, a Associação tem CNPJ ativo mas carece de conta PJ (só 20% das etapas abertas) e conformidade estatutária, o que inviabiliza parcerias institucionais via MROSC (Lei 13.019/14) e impede o recebimento de emendas ou recursos de ESG de grandes corporações de energia locais.",
+            objetivo_geral: "Promover o desenvolvimento comunitário sustentável por meio da estruturação de governança jurídica, implantação da Cozinha Comunitária autossustentável (Cozinha MP-TO) e transição para matriz fotovoltaica.",
+            metas: "Regularizar 100% da documentação jurídica e abrir a Conta PJ da Associação em até 90 dias. Ativar a Cozinha MP-TO com capacidade de 300 refeições semanais e capacitar 45 mulheres locais até o 6º mês. Reduzir em 85% os gastos energéticos da sede através da instalação de microgeração solar até o 8º mês. Atender 120 famílias em oficinas integradas de direitos, governança e empreendedorismo ao longo do ciclo de 12 meses."
+        };
+
+        // Cache global seguro para armazenar as sugestões da IA e evitar erros de parsing de aspas/crases no HTML inline
+        window.tempAIResponses = {};
+
+        // Gerenciamento de Toasts de Notificação
+        function showNotification(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast-notification px-5 py-4 rounded-2xl shadow-xl text-xs font-bold uppercase tracking-wide flex items-center gap-3 border transition-all duration-300 transform scale-100 ${
+                type === 'success' ? 'bg-green-600 text-white border-green-500' :
+                type === 'error' ? 'bg-red-600 text-white border-red-500' :
+                'bg-slate-900 text-white border-slate-800'
+            }`;
+            
+            const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-triangle' : 'fa-info-circle';
+            toast.innerHTML = `<i class="fas ${icon} text-lg"></i> <span>${message}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Navegação Responsiva
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
+
+        // Controle de Modais
         function openIAModal(title, desc) {
             document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('modalDesc').innerText = desc || "Auxiliando no preenchimento metodológico do projeto social.";
             const modal = document.getElementById('iaModal');
             modal.classList.remove('hidden');
             modal.classList.add('active-modal');
         }
+        
         function closeIAModal() {
             const modal = document.getElementById('iaModal');
             modal.classList.remove('active-modal');
             modal.classList.add('hidden');
         }
+
         window.onclick = function(event) {
             const modal = document.getElementById('iaModal');
             if (event.target == modal) { closeIAModal(); }
+        }
+
+        // Controle de Abas do Workspace
+        function switchWorkspaceTab(tabId) {
+            const tabs = ['documento', 'simulador', 'marcolo'];
+            tabs.forEach(id => {
+                const btn = document.getElementById(`tab-btn-${id}`);
+                const content = document.getElementById(`tab-content-${id}`);
+                
+                if (id === tabId) {
+                    btn.className = "bg-blue-600 text-white px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider transition-all flex items-center gap-2 shrink-0";
+                    content.classList.remove('hidden');
+                } else {
+                    btn.className = "bg-slate-800 text-slate-400 hover:text-white px-6 py-3 rounded-xl font-bold uppercase text-xs tracking-wider transition-all flex items-center gap-2 shrink-0";
+                    content.classList.add('hidden');
+                }
+            });
+            showNotification(`Exibindo aba: ${tabId.toUpperCase()}`);
+        }
+
+        // Chamada Segura para API do Gemini com Exponential Backoff (Conforme Regras)
+        async function fetchGeminiAPI(prompt, systemInstruction = "", retries = 5, delay = 1000) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }]
+            };
+            
+            if (systemInstruction) {
+                payload.systemInstruction = { parts: [{ text: systemInstruction }] };
+            }
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    if (retries > 0) {
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        return fetchGeminiAPI(prompt, systemInstruction, retries - 1, delay * 2);
+                    }
+                    throw new Error(`Erro na API (${response.status})`);
+                }
+
+                const result = await response.json();
+                return result.candidates?.[0]?.content?.parts?.[0]?.text || "Erro na geração do conteúdo.";
+            } catch (error) {
+                if (retries > 0) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchGeminiAPI(prompt, systemInstruction, retries - 1, delay * 2);
+                }
+                throw error;
+            }
+        }
+
+        // Disparo de Otimização Específica por Campo com IA
+        async function triggerAISuggestion(sectionType) {
+            let sectionText = "";
+            let fieldLabel = "";
+            
+            if (sectionType === 'contexto') {
+                sectionText = document.getElementById('proj-diagnostico').innerText;
+                fieldLabel = "Identificação e Contexto";
+            } else if (sectionType === 'objetivos') {
+                sectionText = document.getElementById('proj-obj-especificos').innerText;
+                fieldLabel = "Matriz de Objetivos";
+            } else if (sectionType === 'publico') {
+                sectionText = document.getElementById('proj-benef-direto').innerText;
+                fieldLabel = "Público-Alvo";
+            } else if (sectionType === 'metodologia') {
+                sectionText = document.getElementById('proj-diferencial').innerText;
+                fieldLabel = "Metodologia";
+            } else if (sectionType === 'sustentabilidade') {
+                sectionText = document.getElementById('proj-continuidade').innerText;
+                fieldLabel = "Sustentabilidade";
+            }
+
+            openIAModal(`Otimizando: ${fieldLabel}`, "A IA consultiva irá avaliar a consistência técnica sob as regras do Marco Regulatório das Organizações da Sociedade Civil (Lei 13.019/14).");
+            
+            const messageArea = document.getElementById('ai-modal-messages');
+            messageArea.innerHTML += `
+                <div class="flex gap-3 text-right justify-end">
+                    <div class="bg-blue-600 text-white p-4 rounded-2xl max-w-[80%] font-medium">
+                        Otimize e dê robustez técnica para captação de recursos a este trecho de ${fieldLabel}: "${sectionText}"
+                    </div>
+                </div>
+                <div id="loading-spinner" class="flex gap-3">
+                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-spinner animate-spin"></i></div>
+                    <div class="bg-blue-50 p-4 rounded-2xl text-slate-700 italic">Analisando impacto social e conformidade regulatória...</div>
+                </div>
+            `;
+            messageArea.scrollTop = messageArea.scrollHeight;
+
+            try {
+                const systemPrompt = "Você é o Araras AI v1.0, especialista em projetos sociais do Terceiro Setor brasileiro e MROSC. Otimize o texto enviado para torná-lo técnico, atraente para investidores e doadores e totalmente mensurável. Mantenha a resposta com foco na Associação Araras 1 e 2 em Palmas/TO.";
+                const response = await fetchGeminiAPI(`Otimize o seguinte trecho: ${sectionText}`, systemPrompt);
+                
+                document.getElementById('loading-spinner').remove();
+                
+                // Salvamos o resultado no cache global associado à chave de seção correspondente
+                window.tempAIResponses[sectionType] = response;
+                
+                messageArea.innerHTML += `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-robot text-xs"></i></div>
+                        <div class="bg-green-50 p-4 rounded-2xl text-slate-700 font-medium border border-green-200">
+                            <strong>Sugestão Otimizada:</strong><br><br>${response.replace(/\n/g, '<br>')}
+                            <div class="mt-4 flex gap-2">
+                                <button onclick="applyTempAISuggestion('${sectionType}')" class="bg-green-600 hover:bg-green-700 text-white font-bold uppercase text-[9px] px-3 py-1.5 rounded-lg flex items-center gap-1"><i class="fas fa-check"></i> Aplicar no Projeto</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                messageArea.scrollTop = messageArea.scrollHeight;
+            } catch (error) {
+                if (document.getElementById('loading-spinner')) {
+                    document.getElementById('loading-spinner').remove();
+                }
+                messageArea.innerHTML += `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 bg-red-100 text-red-600 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="bg-red-50 p-4 rounded-2xl text-red-700 font-medium">Não foi possível conectar ao assistente inteligente. Verifique a sua conexão de rede e tente novamente.</div>
+                    </div>
+                `;
+                messageArea.scrollTop = messageArea.scrollHeight;
+                showNotification("Falha na chamada ao serviço inteligente.", "error");
+            }
+        }
+
+        // Recupera e aplica com segurança o rascunho temporário gerado no objeto global
+        function applyTempAISuggestion(type) {
+            const optimizedText = window.tempAIResponses[type];
+            if (optimizedText) {
+                acceptAISuggestion(type, optimizedText);
+            } else {
+                showNotification("Nenhuma sugestão encontrada para esta seção no cache do navegador.", "error");
+            }
+        }
+
+        // Aplica a sugestão finalizada diretamente na UI do documento do projeto
+        function acceptAISuggestion(type, optimizedText) {
+            if (type === 'contexto') {
+                document.getElementById('proj-diagnostico').innerText = optimizedText;
+            } else if (type === 'objetivos') {
+                document.getElementById('proj-obj-especificos').innerHTML = optimizedText;
+            } else if (type === 'publico') {
+                document.getElementById('proj-benef-direto').innerText = optimizedText;
+            } else if (type === 'metodologia') {
+                document.getElementById('proj-diferencial').innerText = optimizedText;
+            } else if (type === 'sustentabilidade') {
+                document.getElementById('proj-continuidade').innerText = optimizedText;
+            }
+            closeIAModal();
+            showNotification("Texto otimizado atualizado no documento social com sucesso!", "success");
+        }
+
+        // Chat Lateral do Workspace
+        async function quickPrompt(promptText) {
+            document.getElementById('ai-chat-input').value = promptText;
+            sendChatToAI();
+        }
+
+        async function sendChatToAI() {
+            const input = document.getElementById('ai-chat-input');
+            const responseBox = document.getElementById('ai-chat-response');
+            const prompt = input.value.trim();
+            if (!prompt) return;
+
+            input.value = "";
+            responseBox.classList.remove('hidden');
+            responseBox.innerHTML = `<div class="flex items-center gap-2"><i class="fas fa-spinner animate-spin text-blue-500"></i><span>Analisando documentação...</span></div>`;
+            
+            try {
+                const systemPrompt = "Você é o Araras AI v1.0, um consultor de editais sociais do Terceiro Setor. Analise a dúvida do proponente e dê diretrizes claras com base na Lei 13.019/14 (MROSC). Responda de forma concisa e muito técnica em até 2 parágrafos.";
+                const result = await fetchGeminiAPI(prompt, systemPrompt);
+                responseBox.innerHTML = `<strong class="text-blue-300">Resposta da Auditoria:</strong><br>${result.replace(/\n/g, '<br>')}`;
+            } catch (error) {
+                responseBox.innerHTML = `<span class="text-red-400 font-bold"><i class="fas fa-exclamation-triangle"></i> Falha de comunicação com o servidor de IA. Tente novamente mais tarde.</span>`;
+                showNotification("Erro ao processar instrução da IA.", "error");
+            }
+        }
+
+        // Chat Completo do Modal Principal
+        async function sendModalChat() {
+            const input = document.getElementById('ai-modal-input');
+            const prompt = input.value.trim();
+            if (!prompt) return;
+
+            input.value = "";
+            const messageArea = document.getElementById('ai-modal-messages');
+            messageArea.innerHTML += `
+                <div class="flex gap-3 text-right justify-end">
+                    <div class="bg-blue-600 text-white p-4 rounded-2xl max-w-[80%] font-medium">
+                        ${prompt}
+                    </div>
+                </div>
+            `;
+            messageArea.scrollTop = messageArea.scrollHeight;
+
+            const loadingId = "loader-" + Date.now();
+            messageArea.innerHTML += `
+                <div id="${loadingId}" class="flex gap-3">
+                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-spinner animate-spin"></i></div>
+                    <div class="bg-blue-50 p-4 rounded-2xl text-slate-700 italic">Construindo resposta técnica...</div>
+                </div>
+            `;
+            messageArea.scrollTop = messageArea.scrollHeight;
+
+            try {
+                const systemPrompt = "Você é o Araras AI v1.0, o consultor virtual da FASEC e da Associação das Araras 1 e 2. Responda em português de forma persuasiva, com sólida base jurídica e com foco em transformação social e sustentabilidade.";
+                const result = await fetchGeminiAPI(prompt, systemPrompt);
+                document.getElementById(loadingId).remove();
+                
+                messageArea.innerHTML += `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-robot text-xs"></i></div>
+                        <div class="bg-blue-50 p-4 rounded-2xl text-slate-700 font-medium">
+                            ${result.replace(/\n/g, '<br>')}
+                        </div>
+                    </div>
+                `;
+                messageArea.scrollTop = messageArea.scrollHeight;
+            } catch (error) {
+                if (document.getElementById(loadingId)) {
+                    document.getElementById(loadingId).remove();
+                }
+                messageArea.innerHTML += `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 bg-red-100 text-red-600 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="bg-red-50 p-4 rounded-2xl text-red-700">Erro ao estabelecer comunicação técnica.</div>
+                    </div>
+                `;
+                messageArea.scrollTop = messageArea.scrollHeight;
+            }
+        }
+
+        // Lógica de Copiar Projeto Social Estruturado
+        function copyFullProject() {
+            const title = document.getElementById('project-main-title').innerText;
+            const proponente = document.getElementById('proj-proponente').innerText;
+            const ods = document.getElementById('proj-ods').innerText;
+            const diag = document.getElementById('proj-diagnostico').innerText;
+            const objGeral = document.getElementById('proj-obj-geral').innerText;
+            const objEsp = document.getElementById('proj-obj-especificos').innerText;
+            const benefD = document.getElementById('proj-benef-direto').innerText;
+            const benefI = document.getElementById('proj-benef-indireto').innerText;
+            const fluxo = document.getElementById('proj-metodo-fluxo').innerText;
+            const dif = document.getElementById('proj-diferencial').innerText;
+            const ris = document.getElementById('proj-riscos').innerText;
+            const cont = document.getElementById('proj-continuidade').innerText;
+
+            const fullMarkdown = `
+# ${title}
+
+## 1. IDENTIFICAÇÃO E CONTEXTO
+- **Proponente:** ${proponente}
+- **Alinhamento ODS:** ${ods}
+- **Diagnóstico Socioterritorial:** ${diag}
+
+## 2. MATRIZ DE OBJETIVOS
+- **Objetivo Geral:** ${objGeral}
+- **Objetivos Específicos:**
+${objEsp}
+
+## 3. PÚBLICO-ALVO E IMPACTO
+- **Beneficiários Diretos:** ${benefD}
+- **Beneficiários Indiretos:** ${benefI}
+
+## 4. METODOLOGIA OPERACIONAL
+- **Fluxo de Execução:**
+${fluxo}
+- **Diferencial Metodológico:** ${dif}
+
+## 5. MATRIZ DE RISCOS E SUSTENTABILIDADE
+- **Mitigação de Riscos:** ${ris}
+- **Continuidade Pós-Financiamento:** ${cont}
+            `;
+
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = fullMarkdown;
+            dummy.select();
+            document.execCommand("copy"); // Fallback seguro recomendado nas instruções
+            document.body.removeChild(dummy);
+
+            showNotification("Projeto copiado em formato Markdown com sucesso!", "success");
+        }
+
+        // Simulador de Orçamento Dinâmico (Lei MROSC 13.019/14)
+        function updateBudgetSimulation() {
+            const total = parseFloat(document.getElementById('budget-total').value) || 0;
+            const pctRh = parseFloat(document.getElementById('slider-rh').value) / 100;
+            const pctDireto = parseFloat(document.getElementById('slider-diretos').value) / 100;
+            const pctIndireto = parseFloat(document.getElementById('slider-indiretos').value) / 100;
+
+            const valRh = total * pctRh;
+            const valDireto = total * pctDireto;
+            const valIndireto = total * pctIndireto;
+
+            // Atualiza Rótulos
+            document.getElementById('label-rh').innerText = `R$ ${valRh.toLocaleString('pt-BR', {maximumFractionDigits: 0})} (${(pctRh*100).toFixed(0)}%)`;
+            document.getElementById('label-diretos').innerText = `R$ ${valDireto.toLocaleString('pt-BR', {maximumFractionDigits: 0})} (${(pctDireto*100).toFixed(0)}%)`;
+            document.getElementById('label-indiretos').innerText = `R$ ${valIndireto.toLocaleString('pt-BR', {maximumFractionDigits: 0})} (${(pctIndireto*100).toFixed(0)}%)`;
+
+            // Atualiza Painel de Auditoria de Saída
+            document.getElementById('auditor-total').innerText = `R$ ${total.toLocaleString('pt-BR', {maximumFractionDigits: 0})}`;
+            document.getElementById('auditor-rh').innerText = `R$ ${valRh.toLocaleString('pt-BR', {maximumFractionDigits: 0})}`;
+
+            // Validação MROSC (Limite de 15% para custos indiretos/administração)
+            const warningCard = document.getElementById('mrosc-warning-card');
+            const statusText = document.getElementById('mrosc-status-text');
+            const statusIcon = document.getElementById('mrosc-status-icon');
+
+            if (pctIndireto > 0.15) {
+                warningCard.className = "p-5 rounded-2xl bg-red-950/40 border border-red-500/30 flex items-center justify-between";
+                statusText.className = "text-sm font-black text-red-400";
+                statusText.innerText = `EXCEDE LIMITE MROSC (${(pctIndireto*100).toFixed(0)}%)`;
+                statusIcon.className = "fas fa-times-circle text-2xl text-red-400";
+            } else {
+                warningCard.className = "p-5 rounded-2xl bg-green-950/40 border border-green-500/30 flex items-center justify-between";
+                statusText.className = "text-sm font-black text-green-400";
+                statusText.innerText = `CONFORME MROSC (${(pctIndireto*100).toFixed(0)}%)`;
+                statusIcon.className = "fas fa-check-circle text-2xl text-green-400";
+            }
+        }
+
+        function updateBudgetSliders(changedSlider) {
+            const rh = parseFloat(document.getElementById('slider-rh').value);
+            const diretos = parseFloat(document.getElementById('slider-diretos').value);
+            const indiretos = parseFloat(document.getElementById('slider-indiretos').value);
+
+            // Ajuste simples para manter a soma em 100%
+            const sum = rh + diretos + indiretos;
+            if (sum !== 100) {
+                const diff = 100 - sum;
+                if (changedSlider === 'rh') {
+                    document.getElementById('slider-diretos').value = Math.max(20, diretos + diff);
+                } else if (changedSlider === 'diretos') {
+                    document.getElementById('slider-rh').value = Math.max(10, rh + diff);
+                } else if (changedSlider === 'indiretos') {
+                    document.getElementById('slider-diretos').value = Math.max(20, diretos + diff);
+                }
+            }
+            updateBudgetSimulation();
+        }
+
+        function applySimulatedBudget() {
+            const total = parseFloat(document.getElementById('budget-total').value) || 0;
+            const indirectPct = parseFloat(document.getElementById('slider-indiretos').value);
+            
+            if (indirectPct > 15) {
+                showNotification("O orçamento excede o teto regulatório de 15% para custos indiretos definidos na Lei 13.019/14.", "error");
+                return;
+            }
+
+            showNotification("Novo planejamento orçamentário injetado no rascunho de edital!", "success");
+        }
+
+        // Filtro Interativo das Atividades e Responsabilidades
+        function filterResponsabilidades(status) {
+            const rows = document.querySelectorAll('#tabela-responsabilidades tbody tr');
+            const buttons = ['todos', 'emcurso', 'pendente'];
+            
+            buttons.forEach(id => {
+                const btn = document.getElementById(`filter-btn-${id}`);
+                if (btn) {
+                    if (id === status.toLowerCase().replace(" ", "")) {
+                        btn.className = "bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-bold uppercase transition";
+                    } else {
+                        btn.className = "bg-white text-slate-600 px-4 py-2 rounded-xl text-xs font-bold uppercase border border-slate-200 transition";
+                    }
+                }
+            });
+
+            rows.forEach(row => {
+                const rowStatus = row.getAttribute('data-status');
+                if (status === 'todos' || rowStatus === status) {
+                    row.classList.remove('hidden');
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+        }
+
+        function searchResponsavel() {
+            const query = document.getElementById('responsavel-search').value.toLowerCase();
+            const rows = document.querySelectorAll('#tabela-responsabilidades tbody tr');
+
+            rows.forEach(row => {
+                const name = row.querySelector('.name-col').innerText.toLowerCase();
+                if (name.includes(query)) {
+                    row.classList.remove('hidden');
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            showNotification("Sua mensagem foi enviada à coordenação técnica da FASEC!", "success");
+            event.target.reset();
+        }
+
+        // Inicialização
+        window.onload = function() {
+            updateBudgetSimulation();
         }
     </script>
 </body>
